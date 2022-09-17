@@ -1,0 +1,1 @@
+Numeric can`t be negative

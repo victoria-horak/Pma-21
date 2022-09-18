@@ -1,0 +1,16 @@
+John, [Sep 18, 2022 at 22:44]
+X = [[6,5,7], 
+    [2,3,6], 
+    [7 ,8,9]] 
+   
+Y = [[9,9,7], 
+    [7,5,12], 
+    [3,6,6]] 
+  
+result = [[X[i][j] + Y[i][j]  
+           for j in range(len(X[0]))] 
+          
+          for i in range(len(X))] 
+   
+for r in result: 
+    print(r)

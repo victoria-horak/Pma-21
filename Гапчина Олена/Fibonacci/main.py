@@ -11,5 +11,5 @@ num_of_steps = int(input("Number of steps: "))
 num1 = int(input("First number: "))
 num2 = int(input("Second number: "))
 
-for length in range(num_of_steps + 2):
-    print(fibonacci(length, num1, num2))
+for i in range(num_of_steps + 2):
+    print(fibonacci(i, num1, num2))

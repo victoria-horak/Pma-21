@@ -2,12 +2,13 @@ class IncorrectLength(Exception):
     """Raised when the lengths of the matrixes are not equal"""
 
 def read_matrix(line):
-    short_line = line.split(" ")
+    line = line.replace(" ", "")
+    line = line.replace("\n", "")
     length = 3
     matrix = []
     iterator = 0
     row = []
-    for element in short_line:
+    for element in line:
         row.append(element)
         iterator += 1
         if iterator >= length:

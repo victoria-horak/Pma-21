@@ -1,13 +1,52 @@
-A = [[4,5,6], 
-    [3,8,9], 
-    [2,5,3]] 
-   
-B = [[1,9,5], 
-    [3,7,5], 
-    [2,4,8]] 
-  
-result = [[A[i][j] + B[i][j]  for j in range
-(len(A[0]))] for i in range(len(A))] 
-   
-for r in result: 
-    print(r)
+def readmatrix(filename):
+    matrix=[]
+    with open (filename) as f1:
+        for i in f1:
+            row=[]
+            for j in i.split():
+                row.append(int (j))
+            matrix.append(row)
+    return matrix
+
+
+def printmatrix(m):
+    for row in m:
+        for i in row:
+            print (i,end="\t")
+        print()
+
+
+def addmatrix(m1,m2):
+    r=[]
+    for i in range(len (m1)):
+        row=[]
+        for j in range(len(m1[i])):
+            row.append(m1[i][j]+m2[i][j])
+        r.append(row)
+    return r
+
+
+def writematrix(m,filename):
+    with open(filename,"w") as f:
+        for row in m:
+            s=""
+            for i in row:
+                s+=str(i)+"\t"
+            f.write(s+"\n")
+
+
+if __name__ == '__main__':
+    try:
+        m1 = readmatrix("matrix1.txt")
+        if len(m1)==0:
+            raise ValueError("Matrix 1 is empty ")
+        m2 = readmatrix("matrix2.txt")
+        if len(m2) == 0:
+            raise ValueError("Matrix 2 is empty ")
+        if len(m1)!=len(m2):
+            raise ValueError("Diferent size! ")
+        res=addmatrix(m1,m2)
+        writematrix(res,"result.txt")
+    except ValueError as v:
+        with open("result.txt","w") as f:
+            f. write(str(v))  

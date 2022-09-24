@@ -1,0 +1,33 @@
+def fibonacci (n,l):
+    if len(l)<2:
+        return []
+    a=l[-1]
+    b= l[-2]
+
+    if n>=2:
+         l+=[a+b]
+         return fibonacci(n-1,l)
+    else:
+        return l
+
+
+if __name__ == '__main__':
+    line= input("Input numbers ")
+    s=line.split()
+    f= open("fib.txt","a")
+    try:
+        n=int(s[-1])
+        if n<0:
+            raise ValueError("Negative number ")
+        if len(s)==1:
+            print(fibonacci(n + 1, [0, 1]))
+            print(fibonacci(n + 1, [0, 1]),file=f)
+        elif len (s)==3:
+            print(fibonacci(n+1,[int (s[0]), int (s[1])]))
+            print(fibonacci(n + 1, [int(s[0]), int(s[1])]),file=f)
+        else:
+            print("Incorect elemets ")
+    except ValueError as v:
+        print(str(v))
+        print(str(v),file=f)
+    f.close()

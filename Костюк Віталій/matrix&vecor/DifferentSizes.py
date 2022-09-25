@@ -1,0 +1,2 @@
+class DifferentSizes(Exception):
+    pass

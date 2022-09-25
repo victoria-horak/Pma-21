@@ -78,7 +78,8 @@ class Vector:
             raise diffrentDimensionsException("Vectors have diffrent length")
         result = []
         for i in range(self.length):
-            result.append(int(self.at(i)) + int(vector_2.at(i)))
+            result.append(self.at(i) + vector_2.at(i))
+
         return Vector(result)
 
     @ Convert
@@ -87,7 +88,8 @@ class Vector:
             raise diffrentDimensionsException("Vectors have diffrent length")
         result = []
         for i in range(self.length):
-            result.append(int(self.at(i)) - int(vector_2.at(i)))
+            result.append(self.at(i) - vector_2.at(i))
+
         return Vector(result)
 
     def scalar_mult(self, mult):

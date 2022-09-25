@@ -12,4 +12,4 @@ vector1 = Vector("""
 
 """)
 vector2 = Vector().fromFile(Constants.PATH + "matrix.txt")
-print(vector1.scalar_mult(2))
+print(vector1 + vector2)

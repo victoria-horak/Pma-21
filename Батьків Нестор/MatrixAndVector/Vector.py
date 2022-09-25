@@ -6,20 +6,20 @@ class Vector:
 
     def __init__(self, inputValue=[], splitter=", "):
         self._string_splitter = splitter
-        if isinstance(inputValue, list):
-            self._vector = inputValue
-        if isinstance(inputValue, str):
-            self.fromString(inputValue)
+        self.vector = inputValue
 
     def fromString(self, inputValue):
-        self._vector = re.sub("(^ )|( $)", "", re.sub(
-            "\D+", " ", inputValue)).split(" ")
+        self.fromList(re.sub("(^ )|( $)", "", re.sub(
+            "\D+", " ", inputValue)).split(" "))
 
-    @property
+    def fromList(self, rawList):
+        self._vector = [int(i) for i in rawList]
+
+    @ property
     def splitter(self):
         return self._string_splitter
 
-    @splitter.setter
+    @ splitter.setter
     def splitter(self, splitter: str):
         if not isinstance(splitter, str):
             raise TypeError("Splitter must be str")
@@ -32,24 +32,27 @@ class Vector:
             string = re.sub(", ", self.splitter, string)
         return string
 
-    @property
+    @ property
     def length(self):
         return len(self._vector)
 
-    @property
+    @ property
     def vector(self):
         return self._vector
 
-    @vector.setter
+    @ vector.setter
     def vector(self, inputValue):
-        self.fromString(inputValue)
+        if isinstance(inputValue, list):
+            self.fromList(inputValue)
+        if isinstance(inputValue, str):
+            self.fromString(inputValue)
 
     def fromFile(self, filePath):
         with open(filePath, "r") as file:
             self.vector = file.read()
         return self
 
-    @staticmethod
+    @ staticmethod
     def Convert(func):
         def inner(*args):
             args = list(args)
@@ -65,11 +68,11 @@ class Vector:
         except IndexError as exc:
             return exc
 
-    @Convert
+    @ Convert
     def isSameLength(self, vector_b):
         return self.length == vector_b.length
 
-    @Convert
+    @ Convert
     def __add__(self, vector_2):
         if not self.isSameLength(vector_2):
             raise diffrentDimensionsException("Vectors have diffrent length")
@@ -78,7 +81,7 @@ class Vector:
             result.append(int(self.at(i)) + int(vector_2.at(i)))
         return Vector(result)
 
-    @Convert
+    @ Convert
     def __sub__(self, vector_2):
         if not self.isSameLength(vector_2):
             raise diffrentDimensionsException("Vectors have diffrent length")

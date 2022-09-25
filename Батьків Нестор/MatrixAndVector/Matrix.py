@@ -34,7 +34,7 @@ class Matrix:
         iterator = 0
         row = []
         for element in _list:
-            row.append(element)
+            row.append(int(element))
             iterator += 1
             if iterator >= length:
                 iterator = 0
@@ -124,7 +124,7 @@ class Matrix:
             newMatrix.append([])
             for col in range(self.width):
                 newMatrix[row].append(
-                    int(self.at(row, col)) + int(matrix.at(row, col)))
+                    self.at(row, col) + matrix.at(row, col))
         return Matrix(newMatrix)
 
     def scalar_mult(self, multiplier):
@@ -132,8 +132,7 @@ class Matrix:
         for row in range(self.height):
             newMatrix.append([])
             for col in range(self.width):
-                newMatrix[row].append(
-                    int(self.at(row, col)) * multiplier)
+                newMatrix[row].append(self.at(row, col) * multiplier)
         return Matrix(newMatrix)
 
     def __sub__(self, row=-1, col=-1):

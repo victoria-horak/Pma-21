@@ -13,7 +13,10 @@ class Vector:
             "\D+", " ", inputValue)).split(" "))
 
     def fromList(self, rawList):
-        self._vector = [int(i) for i in rawList]
+        try:
+            self._vector = [int(i) for i in rawList]
+        except ValueError:
+            raise ValueError("Element of Vector must be int!")
 
     @ property
     def splitter(self):
@@ -89,7 +92,6 @@ class Vector:
         result = []
         for i in range(self.length):
             result.append(self.at(i) - vector_2.at(i))
-
         return Vector(result)
 
     def scalar_mult(self, mult):

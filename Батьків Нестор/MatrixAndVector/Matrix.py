@@ -34,12 +34,15 @@ class Matrix:
         iterator = 0
         row = []
         for element in _list:
-            row.append(int(element))
-            iterator += 1
-            if iterator >= length:
-                iterator = 0
-                matrix.append(row)
-                row = []
+            try:
+                row.append(int(element))
+                iterator += 1
+                if iterator >= length:
+                    iterator = 0
+                    matrix.append(row)
+                    row = []
+            except ValueError:
+                raise ValueError("matrix element is not int")
 
         return matrix
 
@@ -98,8 +101,9 @@ class Matrix:
         string = str(self._matrix)
         string = re.sub("'|[\[\]]{2}", "", string)
         if self.splitter != ", ":
-            string = re.sub(", ", self.splitter, string)
+            string = re.sub(", ", self.splitter+"\t", string)
         string = re.sub("\].*?\[", "\n", string)
+        string = "\n" + string + "\n"
         return string
 
     @property
@@ -148,7 +152,7 @@ class Matrix:
             return cls(file.read())
 
     def toFile(self, filePath, overwrite=True):
-        with open(filePath, "w" if overwrite else "a") as file:
+        with open(filePath, "w" if overwrite else "a", encoding="utf-8") as file:
             file.write(str(self) + "\n")
 
     # Alias

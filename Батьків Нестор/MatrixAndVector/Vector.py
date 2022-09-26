@@ -76,22 +76,22 @@ class Vector:
         return self.length == vector_b.length
 
     @ Convert
-    def __add__(self, vector_2):
-        if not self.isSameLength(vector_2):
+    def __add__(self, vector_second):
+        if not self.isSameLength(vector_second):
             raise diffrentDimensionsException("Vectors have diffrent length")
         result = []
         for i in range(self.length):
-            result.append(self.at(i) + vector_2.at(i))
+            result.append(self.at(i) + vector_second.at(i))
 
         return Vector(result)
 
     @ Convert
-    def __sub__(self, vector_2):
-        if not self.isSameLength(vector_2):
+    def __sub__(self, vector_second):
+        if not self.isSameLength(vector_second):
             raise diffrentDimensionsException("Vectors have diffrent length")
         result = []
         for i in range(self.length):
-            result.append(self.at(i) - vector_2.at(i))
+            result.append(self.at(i) - vector_second.at(i))
         return Vector(result)
 
     def scalar_mult(self, mult):

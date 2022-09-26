@@ -131,6 +131,18 @@ class Matrix:
                     self.at(row, col) + matrix.at(row, col))
         return Matrix(newMatrix)
 
+    @Convert
+    def __sub__(self, matrix):
+        if not self.isSameDimensions(matrix):
+            raise diffrentDimensionsException("Matrixes have diffrent sizes")
+        newMatrix = []
+        for row in range(self.height):
+            newMatrix.append([])
+            for col in range(self.width):
+                newMatrix[row].append(
+                    self.at(row, col) - matrix.at(row, col))
+        return Matrix(newMatrix)
+
     def scalar_mult(self, multiplier):
         newMatrix = []
         for row in range(self.height):
@@ -139,7 +151,7 @@ class Matrix:
                 newMatrix[row].append(self.at(row, col) * multiplier)
         return Matrix(newMatrix)
 
-    def __sub__(self, row=-1, col=-1):
+    def subMatrix(self, row=-1, col=-1):
         matrix = self._matrix.copy()
         matrix.pop(row)
         for _row in matrix:

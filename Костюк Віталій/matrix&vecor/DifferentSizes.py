@@ -1,2 +1,0 @@
-class DifferentSizes(Exception):
-    pass

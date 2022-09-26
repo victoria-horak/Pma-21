@@ -1,2 +1,0 @@
-class DifferentSizesVectors(Exception):
-    pass

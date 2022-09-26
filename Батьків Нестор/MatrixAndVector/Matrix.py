@@ -5,8 +5,7 @@ from NotValidListException import NotValidListException
 
 class Matrix:
 
-    def __init__(self, inputValue=[], splitter=", ", fileName=""):
-        print(fileName)
+    def __init__(self, inputValue=[], splitter=", "):
         self._string_splitter = splitter
         self.matrix = inputValue
 
@@ -163,8 +162,8 @@ class Matrix:
         with open(filePath, "r") as file:
             return cls(file.read())
 
-    def toFile(self, filePath, overwrite=True):
-        with open(filePath, "w" if overwrite else "a", encoding="utf-8") as file:
+    def toFile(self, filePath, overwrite=False):
+        with open(filePath, "w" if overwrite else "a") as file:
             file.write(str(self) + "\n")
 
     # Alias

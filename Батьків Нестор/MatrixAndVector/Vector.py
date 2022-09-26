@@ -47,10 +47,10 @@ class Vector:
         if isinstance(inputValue, str):
             self.fromString(inputValue)
 
-    def fromFile(self, filePath):
+    @classmethod
+    def fromFile(cls, filePath):
         with open(filePath, "r") as file:
-            self.vector = file.read()
-        return self
+            return cls(file.read())
 
     @ staticmethod
     def Convert(func):
@@ -94,3 +94,7 @@ class Vector:
 
     def scalar_mult(self, mult):
         return Vector([int(i) * mult for i in self.vector])
+
+    def toFile(self, filePath, overwrite=True):
+        with open(filePath, "w" if overwrite else "a") as file:
+            file.write(str(self) + "\n")

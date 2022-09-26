@@ -142,11 +142,15 @@ class Matrix:
             _row.pop(col)
         return Matrix(matrix)
 
+    @classmethod
+    def fromFile(cls, filePath):
+        with open(filePath, "r") as file:
+            return cls(file.read())
+
+    def toFile(self, filePath, overwrite=True):
+        with open(filePath, "w" if overwrite else "a") as file:
+            file.write(str(self) + "\n")
+
     # Alias
     add = __add__
     sub = __sub__
-
-    def fromFile(self, filePath):
-        with open(filePath, "r") as file:
-            self.matrix = file.read()
-        return self

@@ -1,15 +1,61 @@
-def fibonacci(steps=0, first_number=0, second_number=1):
-    if steps == 0:
-        return first_number
-    elif steps == 1:
-        return second_number
+class IncorrectLength(Exception):
+    """If the number of steps for fibonacci sequence is less than or equal to 0"""
+
+
+# *args allows to pass a variable number of (non-keyword) arguments to a function
+def fibonacci(*args):
+    sequence = ""
+
+    # if only the length is passed
+    if len(args) == 1:
+        element1 = 0
+        element2 = 1
+        steps = args[0]
+
+    # if the first two numbers and the length are passed
+    elif len(args) == 3:
+        element1 = args[0]
+        element2 = args[1]
+        steps = args[2]
+
     else:
-        return fibonacci(steps - 1, first_number, second_number) + fibonacci(steps - 2, first_number, second_number)
+        element1 = args[0]
+        element2 = args[1]
+        steps = args[2]
+        sequence = args[3]
+
+    if steps < 0:
+        raise IncorrectLength("Length <= 0")
+
+    # if the sequence is empty, add the first two elements
+    if len(sequence) == 0:
+        sequence += str(element1) + " " + str(element2) + " "
+    # keep adding next elements
+    sequence += str(element1 + element2) + " "
+
+    if steps == 1:
+        # return first three elements
+        return sequence
+    else:
+        # all other elements using recursion
+        return fibonacci(element2, element1 + element2, steps - 1, sequence)
 
 
-num_of_steps = int(input("Number of steps: "))
-num1 = int(input("First number: "))
-num2 = int(input("Second number: "))
+# user input:
+first_element = int(input("First: "))
+second_element = int(input("Second: "))
+number_of_steps = int(input("Steps: "))
 
-for i in range(num_of_steps + 2):
-    print(fibonacci(i, num1, num2))
+# print result:
+try:
+    print(fibonacci(first_element, second_element, number_of_steps))
+except IncorrectLength as error:
+    print(error)
+
+# write into file:
+file = open('fibonacci.txt', 'w')
+try:
+    file.write(str(fibonacci(first_element, second_element, number_of_steps)) + ' ')
+except IncorrectLength as error:
+    file.write(str(error))
+file.close()

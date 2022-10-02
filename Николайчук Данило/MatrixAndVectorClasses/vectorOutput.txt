@@ -1,0 +1,2 @@
+Vector of adding:[8, 13, 75, 11, 13, 10]
+Vector of subtraction:[0, -3, 57, -1, -1, -6]

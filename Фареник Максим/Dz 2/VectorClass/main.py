@@ -29,6 +29,6 @@ try:
 
 except IncorrectSize as e:
     file = open('result.txt', 'w')
-    file.write(str(e) + '\n')
+    file.write(str(e))
     print(e)
     file.close()

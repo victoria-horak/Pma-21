@@ -34,6 +34,6 @@ try:
 
 except IncorrectSize as e:
     file = open('resultMatrix.txt', 'w')
-    file.write(str(e) + '\n')
+    file.write(str(e))
     print(e)
     file.close()

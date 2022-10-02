@@ -1,4 +1,3 @@
-from unittest import result
 from Matrix import Matrix
 from Vector import Vector
 import Constants
@@ -15,8 +14,8 @@ with open(resultFile, "w") as file:
     file.write("")
 
 matrix_first = Matrix("""
-2 3 5 6
 4 5 8 7
+5 6 20 -2
 9 4 5 6
 -2 3 0 -4
 """)
@@ -25,12 +24,13 @@ vector_first = Vector("2 3 4 5")
 vector_second = Vector.fromFile(Constants.PATH + "vector.txt")
 
 add_to_file("Matrix First:")
-matrix_first.toFile(resultFile)
+Matrix.toFile_Static(matrix_first, resultFile)
 add_to_file("Matrix Second:")
 matrix_second.toFile(resultFile)
 # +
 add_to_file("Addition")
-(matrix_first + matrix_second).toFile(resultFile)
+Matrix.add(matrix_first, matrix_second).toFile(resultFile)
+#(matrix_first + matrix_second).toFile(resultFile)
 # -
 add_to_file("Substraction")
 (matrix_first - matrix_second).toFile(resultFile)
@@ -52,7 +52,7 @@ add_to_file("Vector Second:")
 vector_second.toFile(resultFile)
 # +
 add_to_file("Addition")
-(vector_first + vector_second).toFile(resultFile)
+Vector.toFile_Static(vector_first + vector_second, resultFile)
 # -
 add_to_file("Substraction")
 (vector_first - vector_second).toFile(resultFile)

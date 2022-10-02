@@ -118,29 +118,37 @@ class Matrix:
     def isSameDimensions(self, matrix):
         return self.width == matrix.width and self.height == matrix.height
 
+    @staticmethod
     @Convert
-    def __add__(self, matrix):
-        if not self.isSameDimensions(matrix):
+    def add(matrix_a, matrix_b):
+        if not matrix_a.isSameDimensions(matrix_b):
             raise diffrentDimensionsException("Matrixes have diffrent sizes")
         newMatrix = []
-        for row in range(self.height):
+        for row in range(matrix_a.height):
             newMatrix.append([])
-            for col in range(self.width):
+            for col in range(matrix_a.width):
                 newMatrix[row].append(
-                    self.at(row, col) + matrix.at(row, col))
+                    matrix_a.at(row, col) + matrix_b.at(row, col))
         return Matrix(newMatrix)
 
+    def __add__(self, matrix):
+        return self.add(self, matrix)
+
+    @staticmethod
     @Convert
-    def __sub__(self, matrix):
-        if not self.isSameDimensions(matrix):
+    def sub(matrix_a, matrix_b):
+        if not matrix_a.isSameDimensions(matrix_b):
             raise diffrentDimensionsException("Matrixes have diffrent sizes")
         newMatrix = []
-        for row in range(self.height):
+        for row in range(matrix_a.height):
             newMatrix.append([])
-            for col in range(self.width):
+            for col in range(matrix_a.width):
                 newMatrix[row].append(
-                    self.at(row, col) - matrix.at(row, col))
+                    matrix_a.at(row, col) - matrix_b.at(row, col))
         return Matrix(newMatrix)
+
+    def __sub__(self, matrix_b):
+        return self.sub(self, matrix_b)
 
     def scalar_mult(self, multiplier):
         newMatrix = []
@@ -162,10 +170,10 @@ class Matrix:
         with open(filePath, "r") as file:
             return cls(file.read())
 
-    def toFile(self, filePath, overwrite=False):
+    @staticmethod
+    def toFile_Static(matrix, filePath, overwrite=False):
         with open(filePath, "w" if overwrite else "a") as file:
-            file.write(str(self) + "\n")
+            file.write(str(matrix) + "\n")
 
-    # Alias
-    add = __add__
-    sub = __sub__
+    def toFile(self, filePath, overwrite=False):
+        self.toFile_Static(self, filePath, overwrite)

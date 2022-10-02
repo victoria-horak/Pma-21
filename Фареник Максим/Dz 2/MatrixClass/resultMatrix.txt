@@ -1,0 +1,9 @@
+Result of Add:
+9 10 7 
+7 5 7 
+10 8 13 
+
+Result of Sub:
+1 -2 -1 
+-1 -1 -5 
+2 4 1 

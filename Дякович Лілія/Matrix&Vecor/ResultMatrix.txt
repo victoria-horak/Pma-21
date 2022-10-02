@@ -1,0 +1,7 @@
+[4, 6]
+[10, 12]
+
+[2, 2]
+[2, 2]
+
+matrices have different sizes

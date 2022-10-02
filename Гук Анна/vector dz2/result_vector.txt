@@ -1,0 +1,4 @@
+Result of Add:
+[3, 5, 7]
+Result of Sub:
+[1, 1, 1]

@@ -4,9 +4,9 @@ from diffrentDimensionsException import diffrentDimensionsException
 
 class Vector:
 
-    def __init__(self, inputValue=[], splitter=", "):
+    def __init__(self, inputValue, splitter=", "):
         self._string_splitter = splitter
-        self.vector = inputValue
+        self.vector = inputValue or []
 
     def fromString(self, inputValue):
         self.fromList(re.sub("(^ )|( $)", "", re.sub(

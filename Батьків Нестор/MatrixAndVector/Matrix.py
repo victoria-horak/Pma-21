@@ -5,9 +5,9 @@ from NotValidListException import NotValidListException
 
 class Matrix:
 
-    def __init__(self, inputValue=[], splitter=", "):
+    def __init__(self, inputValue, splitter=", "):
         self._string_splitter = splitter
-        self.matrix = inputValue
+        self.matrix = inputValue or []
 
     def isEmpty(self):
         return len(self._matrix) == 0

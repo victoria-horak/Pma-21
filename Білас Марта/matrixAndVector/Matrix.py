@@ -7,21 +7,19 @@ class Matrix:
 
 class Matrix:
 
-    def __init__(self, matrix:int=None):
+    def __init__(self, matrix: int = []):
         try:
-            if (matrix is None):
-                self.matrix = []
-            else:
-                self.matrix = matrix
+            self.matrix = matrix
         except ValueError:
             print("value error")
         pass
 
     def readFromFile(self, fileName):
+        self.matrix = []
         with open(fileName) as file:
             try:
                 for line in file:
-                    if (not line.isspace()):
+                    if not line.isspace():
                         line = line.split(",")
                         row = []
                         for columnIterator in range(0, len(line)):
@@ -75,6 +73,7 @@ class Matrix:
 
     def __add__(self, other):
         result = Matrix()
+        result.matrix = []
         rowLengthSelf = len(self.matrix)
         colonLengthSelf = len(self.matrix[0])
         rowLengthOther = len(other.matrix)
@@ -99,11 +98,11 @@ class Matrix:
         return self.matrix[rowIterator][columnIterator]
 
     @classmethod
-    def staticAdd(cls, matrix_a=Matrix(), matrix_b=Matrix()):
+    def staticAdd(cls, firstMatrix=Matrix(), secondMatrix=Matrix()):
 
         result = []
-        rowLengthSelf = matrix_a.length()
-        rowLengthOther = matrix_b.length()
+        rowLengthSelf = firstMatrix.length()
+        rowLengthOther = secondMatrix.length()
 
         try:
             if (rowLengthOther != rowLengthSelf):
@@ -111,7 +110,7 @@ class Matrix:
             for rowIterator in range(0, rowLengthSelf):
                 row = []
                 for columnIterator in range(0, rowLengthSelf):
-                    element = matrix_a.at(rowIterator, columnIterator) + matrix_b.at(rowIterator, columnIterator)
+                    element = firstMatrix.at(rowIterator, columnIterator) + secondMatrix.at(rowIterator, columnIterator)
                     row.append(element)
                 result.append(row)
         except DifferentLength:
@@ -120,6 +119,7 @@ class Matrix:
 
     def __sub__(self, other):
         result = Matrix()
+        result.matrix = []
         rowLengthSelf = len(self.matrix)
         colonLengthSelf = len(self.matrix[0])
         rowLengthOther = len(other.matrix)
@@ -139,11 +139,11 @@ class Matrix:
         return result
 
     @classmethod
-    def staticSub(cls, matrix_a=Matrix(), matrix_b=Matrix()):
+    def staticSub(cls, firstMatrix=Matrix(), secondMatrix=Matrix()):
 
         result = []
-        rowLengthSelf = matrix_a.length()
-        rowLengthOther = matrix_b.length()
+        rowLengthSelf = firstMatrix.length()
+        rowLengthOther = secondMatrix.length()
 
         try:
             if (rowLengthOther != rowLengthSelf):
@@ -151,7 +151,7 @@ class Matrix:
             for rowIterator in range(0, rowLengthSelf):
                 row = []
                 for columnIterator in range(0, rowLengthSelf):
-                    element = matrix_a.at(rowIterator, columnIterator) - matrix_b.at(rowIterator, columnIterator)
+                    element = firstMatrix.at(rowIterator, columnIterator) - secondMatrix.at(rowIterator, columnIterator)
                     row.append(element)
                 result.append(row)
         except DifferentLength:

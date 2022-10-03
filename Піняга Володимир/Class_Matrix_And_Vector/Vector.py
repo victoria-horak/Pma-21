@@ -1,59 +1,51 @@
-class differLength(Exception): #для вип. різних довжин у векторах
-    pass
+from differLength import *
+
+class Vector():
+    def __init__(self, vector):
+        self.vector = vector
 
 
-class Vector:
-    def __init__(self, len_vector):
-        self.len_vector = len_vector
-        self.vector = []
+    def read_vector(self, file_name):
+        with open(file_name, "r") as file:
+            row_vector = []
+            for line in file:
+                for element in line.strip().split(','):
+                    row_vector.append(element)
+            row_vector = [element for element in row_vector if element]
+            row_vector = [int(element) for element in row_vector if element]
+            self.vector = row_vector
 
-    def read_from_file(self, fileName):
-        with open(fileName, 'r') as file:
-            for i in range(0, self.len_vector):
-                self.vector.append(int(file.readline().strip())) #strip - видаляє всі пробіли в тхт файлі
+        file.close()
 
         return self.vector
 
 
-    def print_vectors(self): #вивід векторів у консоль
-        if self.vector != []:
-            print("(" , end="")
-
-            for i in range(0, self.len_vector):
-                print(self.vector[i] - 1, end=",")
-
-            print(self.vector[i], end=(",").rstrip(",") + ")")
-
+    def __add__(self, other):
+        if len(self.vector) == len(other.vector):
+            vector = [self.vector[iter] + other.vector[iter] for iter in range(len(self.vector))]
+            return Vector(vector)
         else:
-            pass
+            raise differLength('Vectors don`t have the same size! ')
 
 
-    def write_result(self): #запис у файл результату
-        try:
-            with open("result_vector.txt", "a+") as result_vector:
-
-                for i in range(0, self.len_vector):
-                    result_vector.write(str(self.vector[i]))
-                    result_vector.write(" ")
-                result_vector.write("\n")
-
-        finally: #обов'язково відбудеться після блоку try
-            result_vector.close()
-
-
-    def add_2_vectors(self, second): #додавання векторів
-        if(len(self.vector) == len(second.vector)):
-            res_vector = Vector(self.len_vector)
-            res_vector.vector = [] #утворення результуючого вектора
-            for iter in range(0, self.len_vector and second.len_vector):
-                res_vector.vector.append(int(self.vector[iter]) + int(second.vector[iter]))
-
+    def __sub__(self, other):
+        if len(self.vector) == len(other.vector):
+            vector = [self.vector[iter] - other.vector[iter] for iter in range(len(self.vector))]
+            return Vector(vector)
         else:
-            res_vector = Vector(self.len_vector) #утворення результуючого вектора
-            res_vector.vector = []
-            print("Vectors cannot be added")
+            raise differLength('Vectors don`t have the same size! ')
 
-        return res_vector
+
+    def __str__(self):
+        return str(self.vector)
+
+
+    def write(self, fileName):
+        f = open(fileName, "a")
+        f.write(str(self.vector))
+        f.write('\n')
+        f.close()
+
 
 
     def substract_2_vectors(self, second): #віднімання 2 векторів

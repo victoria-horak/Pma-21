@@ -1,0 +1,42 @@
+class InvalidValue(Exception):
+    pass
+
+
+def fibonachi(count_step=0, first_fibonacci=0, second_fibonacci=1):
+    if count_step == 0:
+        return first_fibonacci
+    if count_step == 1:
+        return second_fibonacci
+    else:
+        return (fibonachi(count_step - 1, first_fibonacci, second_fibonacci)
+                + fibonachi(count_step - 2, first_fibonacci, second_fibonacci))
+
+
+first = 0
+second = 1
+
+answer = int(input("Default version 1 - yes; any other - no = "))
+
+if answer == 1:
+    first_fibonacci = first
+    second_fibonacci = second
+
+
+else:
+    first_fibonacci = int(input("First fibonachi = "))
+    second_fibonacci = int(input("Second fibonachi = "))
+step = int(input("Count step = "))
+file_result = open("result.txt", 'a')
+try:
+    if step < 0:
+        raise InvalidValue("Input negative count step")
+    else:
+        result = str(first_fibonacci) + "," + str(second_fibonacci)
+        for iterator in range(2, step + 2):
+            result += str("," + str(fibonachi(iterator, first_fibonacci, second_fibonacci)))
+        print(result)
+        file_result.write(result + "\n")
+
+except InvalidValue as error:
+    file_result.write("Error:" + str(error) + '\n')
+    print("Error:" + str(error))

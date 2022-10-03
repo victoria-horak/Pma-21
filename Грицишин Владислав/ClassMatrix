@@ -1,0 +1,53 @@
+def readmatrix(filename):
+    matrix=[]
+    with open (filename) as file1:
+        for i in file1:
+            if i!="\n":
+                row=[]
+                for j in i.split():
+                    row.append(int (j))
+                matrix.append(row)
+    return matrix
+
+
+def printmatrix(matrix):
+    for row in matrix:
+        for i in row:
+            print (i,end="\t")
+        print()
+
+
+def addmatrix(matrix1,matrix2):
+    result=[]
+    for i in range(len (matrix1)):
+        row=[]
+        for j in range(len(matrix1[i])):
+            row.append(matrix1[i][j]+matrix2[i][j])
+        result.append(row)
+    return result
+
+
+def writematrix(matrix,filename):
+    with open(filename,"w") as file:
+        for row in matrix:
+            s=""
+            for i in row:
+                s+=str(i)+"\t"
+            file.write(s+"\n")
+
+
+if __name__ == '__main__':
+    try:
+        matrix1 = readmatrix("matrix1.txt")
+        if len(matrix1)==0:
+            raise ValueError("Matrix 1 is empty ")
+        matrix2 = readmatrix("matrix2.txt")
+        if len(matrix2) == 0:
+            raise ValueError("Matrix 2 is empty ")
+        if len(matrix1)!=len(matrix2)  or len(matrix1[0]) != len(matrix2[0]):
+            raise ValueError("Diferent size! ")
+        res=addmatrix(matrix1,matrix2)
+        writematrix(res,"result.txt")
+    except ValueError as v:
+        with open("result.txt","w") as file:
+            file. write(str(v))

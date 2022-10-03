@@ -1,0 +1,8 @@
+Add matrix:
+2,2,2
+2,0,2
+2,2,2
+Subtraction matrix:
+0,0,0
+0,-2,0
+0,0,0

@@ -7,17 +7,15 @@ class Vector:
 
 class Vector:
 
-    def __init__(self, vector:int=None):
+    def init(self, vector=[]):
         try:
-            if (vector is None):
-                self.vector = []
-            else:
-                self.vector = vector
+            self.vector = vector
         except ValueError:
             print("value error")
         pass
 
     def readFromFile(self, fileName):
+        self.vector = []
         with open(fileName) as file:
             try:
                 for line in file:
@@ -28,7 +26,6 @@ class Vector:
                             self.vector.append(element)
             except ValueError:
                 print("wrong element type")
-                self.vector.clear()
 
     @classmethod
     def staticReadFromFile(cls, fileName):
@@ -69,6 +66,7 @@ class Vector:
 
     def __add__(self, other):
         result = Vector()
+        result.vector = []
         try:
             if (len(self.vector) != len(other.vector)):
                 raise DifferentLength()
@@ -79,19 +77,20 @@ class Vector:
         return result
 
     @classmethod
-    def staticAdd(cls, vector1=Vector(), vector2=Vector()):
+    def staticAdd(cls, firstVector=Vector(), secondVector=Vector()):
         result = []
         try:
-            if (len(vector1.vector) != len(vector2.vector)):
+            if (len(firstVector.vector) != len(secondVector.vector)):
                 raise DifferentLength()
-            for i in range(0, len(vector1.vector)):
-                result.append(vector1.vector[i] + vector2.vector[i])
+            for i in range(0, len(firstVector.vector)):
+                result.append(firstVector.vector[i] + secondVector.vector[i])
         except DifferentLength:
             print("vectors have different length")
         return cls(result)
 
     def __sub__(self, other):
         result = Vector()
+        result.vector = []
         try:
             if (len(self.vector) != len(other.vector)):
                 raise DifferentLength()
@@ -102,13 +101,13 @@ class Vector:
         return result
 
     @classmethod
-    def staticAdd(cls, vector1=Vector(), vector2=Vector()):
+    def staticAdd(cls, firstVector=Vector(), secondVector=Vector()):
         result = []
         try:
-            if (len(vector1.vector) != len(vector2.vector)):
+            if (len(firstVector.vector) != len(secondVector.vector)):
                 raise DifferentLength()
-            for i in range(0, len(vector1.vector)):
-                result.append(vector1.vector[i] - vector2.vector[i])
+            for i in range(0, len(firstVector.vector)):
+                result.append(firstVector.vector[i] - secondVector.vector[i])
         except DifferentLength:
             print("vectors have different length")
         return cls(result)

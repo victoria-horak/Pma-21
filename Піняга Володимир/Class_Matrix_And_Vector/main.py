@@ -1,66 +1,73 @@
 from Matrix import Matrix
 from Vector import Vector
-from differSize import differSize
-from differLength import differLength
 
 
-#матриці
+
+
 try:
-    result_matrix = open('result_matrix.txt', 'w')
-    print('first matrix: ')
+
+    result_matrix_file = open('result_matrix.txt', 'a')
     first = []
-    firstMatrix = Matrix(first)
-    firstMatrix.read_Matrix('Matrix1.txt')
-    print("first matrix has been read")
-
-    print('second matrix: ')
     second = []
-    secondMatrix = Matrix(second)
-    secondMatrix.read_Matrix('Matrix2.txt')
-    print("second matrix has been read")
+    first_matrix = Matrix(first)
+    second_matrix = Matrix(second)
 
-    result_add_matrix = firstMatrix + secondMatrix
-    result_add_matrix.write_to_file(result_add_matrix, 'result_matrix.txt')
-    print('2 matrixes has been added')
+    first_matrix.read_matrix('Matrix1.txt')
+    second_matrix.read_matrix('Matrix2.txt')
 
-     result_sub_matrix = firstMatrix - secondMatrix
-     result_sub_matrix.write_to_file(result_sub_matrix, 'result_matrix.txt')
-     print('2 matrixes has been substracted')
+    print("Matrix 1:")
+    print(first_matrix)
 
-    result_matrix.close()
-except differSize as error:
-    print(error)
+    print("Matrix 2:")
+    print(second_matrix)
 
+    result_add_matrix = first_matrix + second_matrix
+    print("Add of matrix:")
+    print(result_add_matrix)
+    result_add_matrix.write('result_matrix.txt')
 
-вектори
- try:
-     print('First vector:')
-     first = Vector(5)
-     first.read_from_file('vector1.txt')
-     first.print_vectors()
+    result_sub_matrix = first_matrix - second_matrix
+    print("Sub of matrix:")
+    print(result_sub_matrix)
+    result_sub_matrix.write('result_matrix.txt')
 
-     print('\nSecond vector:')
-     second = Vector(5)
-     second.read_from_file('vector2.txt')
-     second.print_vectors()
+except differSize as e:
+    file_matrix.write(str(e) + '\n')
+    print(e)
 
-     result_vector = open('result_vector.txt', 'w')
+result_matrix_file.close()
 
-     # print('\nAdding: first vector + second vector: ')
-     result_add_vector = Vector(5)
-     result_add_vector = first.add_2_vectors(second)
-     # result_add_vector.print_vectors()
-     result_add_vector.write_result()
-     print('\n2 vectors have been added')
+try:
 
-     # print('\nSubstraction: first vector - second vector: ')
-     result_sub_vector = Vector(5)
-     result_sub_vector = first.substract_2_vectors(second)
-     # result_sub_vector.print_vectors()
-     result_sub_vector.write_result()
-     print('2 vectors have been substracted')
+    result_vector_file = open('result_vector.txt', 'a')
+    vec1 = []
+    vec2 = []
+    vector1 = Vector(vec1)
+    vector2 = Vector(vec2)
 
-     result_vector.close()
+    vector1.read_vector('vector1.txt')
+    vector2.read_vector('vector2.txt')
 
- except differLength as error:
-     print(error)
+    print("\nVector 1:")
+    print(vector1)
+    print("\nVector 2")
+    print(vector2)
+
+    result_vector_add = vector1 + vector2
+
+    result_vector_add.write('result_vector.txt')
+    result_vector_file.write('\n')
+
+    print("\nVectors adding:")
+    print(result_vector_add)
+
+    result_vector_sub = vector1 - vector2
+    result_vector_sub.write('result_vector.txt')
+
+    print("\nVectors substraction")
+    print(result_vector_sub)
+except differLength as e:
+    result_vector_file.write(str(e)+'\n')
+    print(e)
+
+result_vector_file.close()

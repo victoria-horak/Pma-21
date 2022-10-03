@@ -1,0 +1,47 @@
+class Vector:
+    def __init__(self, n=1):
+        self.size=n
+        self.vector=[0 for i in range(self.size)]
+
+
+    def read (self, filename):
+        with open (filename) as f:
+            line=f.readlines()
+            self.vector=[]
+            for i in line:
+                items= i.split()
+                for j in items:
+                    self.vector.append(int(j))
+            self.size=len(self.vector)
+    def write (self, filename):
+        s=[str(i) for i in self.vector]
+        with open (filename,"w") as f:
+            f.write(" ".join(s))
+
+
+    def addvector (self, a):
+        if self.size!=a.size:
+            raise ValueError ("Diferent size ")
+        res=Vector (self.size)
+        for i in range (self.size):
+            res.vector[i]=self.vector[i]+a.vector[i]
+        return res
+
+
+    def substructvector (self, a):
+        if self.size!=a.size:
+            raise ValueError ("Diferent size ")
+        res=Vector (self.size)
+        for i in range (self.size):
+            res.vector[i]=self.vector[i]-a.vector[i]
+        return res
+
+v=Vector()
+v.read("vector1.txt")
+u=Vector()
+u.read("vector2.txt")
+try:
+    res=v.addvector(u)
+    res.write("result.txt")
+except ValueError as f:
+    print(str(f))

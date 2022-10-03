@@ -4,7 +4,7 @@ from diffrentDimensionsException import diffrentDimensionsException
 
 class Vector:
 
-    def __init__(self, inputValue, splitter=", "):
+    def __init__(self, inputValue=None, splitter=", "):
         self._string_splitter = splitter
         self.vector = inputValue or []
 

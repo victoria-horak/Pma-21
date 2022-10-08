@@ -25,13 +25,9 @@ def read_matrix_from_file(name_of_file):
 
 # function for adding two matrices
 def add_two_matrices(mtrx1, mtrx2):
-    # len(mtrx1) - rows, len(mtrx1[0]) - columns
     if len(mtrx1) != len(mtrx2) or len(mtrx1[0]) != len(mtrx2[0]):
         raise WrongSize("The matrices have different size")
-    # create a result matrix of the same size as to matrices to be added,
-    # all elements of it are equal to 0
     result = [[0] * len(mtrx1[i]) for i in range(len(mtrx1))]
-    # change "0"s to elements of the new matrix (sum)
     for i in range(len(mtrx1)):
         for j in range(len(mtrx1[i])):
             result[i][j] = mtrx1[i][j] + mtrx2[i][j]

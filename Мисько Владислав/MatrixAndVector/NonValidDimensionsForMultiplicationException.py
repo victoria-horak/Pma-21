@@ -1,0 +1,6 @@
+class NonValidDimensionsForMultiplicationException(Exception):
+    pass 
+
+
+
+

@@ -1,0 +1,2 @@
+class InvalidDimensionsForMatrixMultiplication(Exception):
+    pass

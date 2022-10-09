@@ -7,23 +7,13 @@ class Matrix:
         self.matrix = data
 
     @staticmethod
-    def read_from_file(name_of_file):
-        matrix = []
-        f = open(name_of_file, 'r')
-        split_read = f.read().split("\n")
-        f.close()
-        for row_iterator in range(0, len(split_read)):
-            row_element = split_read[row_iterator]
-            if row_element == '':
-                continue
-            column_elements = row_element.split(",")
-            row = []
-            for column_iterator in range(0, len(column_elements)):
-                element = column_elements[column_iterator]
-                if element == '':
+    def read_from_file(file_name):
+        with open(file_name, 'r') as file:
+            matrix = []
+            for row in file:
+                if row.strip() == "":
                     continue
-                row.append(int(element))
-            matrix.append(row)
+                matrix.append([int(element) for element in row.split(',')])
         return matrix
 
     def get_matrix(self):

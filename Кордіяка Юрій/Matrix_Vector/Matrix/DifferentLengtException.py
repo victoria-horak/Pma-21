@@ -1,2 +1,0 @@
-class DifferentLengthException(Exception):
-    pass

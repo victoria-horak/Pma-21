@@ -1,0 +1,24 @@
+def fib (n , first = 0 , second = 1, ):
+      if n <= 1 :
+           return n
+      else :
+          return fib (n-1)+fib(n-2)
+    
+#print (fib (int(input(" n = "))))
+
+res = open(" res.txt", "a")    
+try: 
+    n = int(input('Enter n: '))
+    if (n < 0): 
+        raise Exception
+    else :
+        for i in range (n + 2) :
+            print (fib (i))
+        print ()   
+        
+except Exception:
+    res.write('Value is invalid')
+    print('Value is invalid')
+    res.close()
+    exit()
+

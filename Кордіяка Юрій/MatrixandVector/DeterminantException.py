@@ -1,0 +1,2 @@
+class DeterminantException(Exception):
+    pass

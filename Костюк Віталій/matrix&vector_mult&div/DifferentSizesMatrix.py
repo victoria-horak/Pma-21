@@ -1,0 +1,2 @@
+class DifferentSizesMatrix(Exception):
+    pass

@@ -1,0 +1,140 @@
+class Matrix:
+    def __init__(self,n=1,m=1):
+        self.rows=n
+        self.columns=m
+        self.matrix=[[0 for j in range(m)] for i in range(n)]
+    def read(self,filename):
+        self.matrix = []
+        with open(filename) as f:
+            lines= f.readlines()
+            lst=[]
+            for i in lines:
+                if i != "\n":
+                    row = []
+                    for j in i.split():
+                        row.append(int(j))
+                    lst.append(len(row))
+                    self.matrix.append(row)
+            self.rows=len(self.matrix)
+            self.columns = min(lst)
+            return self.matrix
+    def print(self):
+        for i in self.matrix:
+            for x in i:
+                print(x,end="\t")
+            print()
+    def addmatrix(self,m):
+        if self.rows!=m.rows or self.columns!=m.columns:
+            raise ValueError("Diferent size ")
+        res=Matrix(self.rows, self.columns)
+        for i in range(res.rows):
+            for j in range(res.columns):
+                res.matrix[i][j]=self.matrix[i][j]+m.matrix[i][j]
+        return res
+
+    def substractmatrix(self,m):
+        if self.rows!=m.rows or self.columns!=m.columns:
+            raise ValueError("Diferent size ")
+        res=Matrix(self.rows, self.columns)
+        for i in range(res.rows):
+            for j in range(res.columns):
+                res.matrix[i][j]=self.matrix[i][j]-m.matrix[i][j]
+        return res
+    def write(self,filename):
+        with open(filename,"w") as f:
+            for i in self.matrix:
+                s=[str(round(j,4)) for j in i]
+                f.write(" ".join(s)+"\n")
+
+    def multiplication (self,m):
+        if self.columns!=m.rows:
+            raise ValueError ("Diferent size ")
+        res=Matrix(self.rows, m.columns)
+        for i in range (self.rows):
+            for j in range (m.columns):
+                s=0
+                for k in range (self.columns):
+                    s+=self.matrix[i][k]*m.matrix[k][j]
+                res.matrix[i][j]=s
+        return res
+    def transposition (self):
+        res=Matrix(self.columns,self.rows)
+        for i in range (self.columns):
+            for j in range (self.rows):
+                res.matrix[i][j]=self.matrix[j][i]
+        return res
+
+    def minor (self,n,m):
+        res=Matrix(self.rows-1,self.columns-1)
+        i1=0
+        j1=0
+        for i in range (self.rows):
+            if i==n:
+                continue
+            else:
+                j1=0
+                for j in range (self.columns):
+                    if j==m:
+                        continue
+                    else:
+                        res.matrix[i1][j1]=self.matrix[i][j]
+                        j1+=1
+                i1+=1
+        return  res
+
+    def determinant (self):
+        n=self.rows
+        if n==1:
+            return self.matrix[0][0]
+        res=0
+        for i in range (n):
+            res+=(-1)**i*self.matrix[0][i]*self.minor(0,i).determinant()
+        return res
+
+    def supplemented (self):
+        res=Matrix(self.rows, self.columns)
+        for i in range (self.rows):
+            for j in range (self.columns):
+                res.matrix[i][j]=(-1)**(i+j)*self.minor(i,j).determinant()
+        return  res
+
+
+    def revers (self):
+        if self.rows!=self.columns:
+            raise ValueError ("Diferent size ")
+        det=self.determinant()
+        if det==0:
+            raise ValueError ("Matrix degenerate ")
+        det=1/det
+        res=self.supplemented().transposition()
+        for i in range(res.rows):
+            for j in range (res.columns):
+                res.matrix[i][j]*=det
+        return  res
+
+    def division (self,m):
+        m1=m.revers()
+        return self.multiplication(m1)
+
+
+
+
+
+m=Matrix()
+m.read("matrix1.txt")
+m.print()
+n=Matrix()
+n.read("matrix2.txt")
+n.print()
+try:
+    res=m.addmatrix(n)
+    res.print()
+    res.write("addres.txt")
+    res=m.substractmatrix(n)
+    res.write("minusres.txt")
+    res=m.multiplication(n)
+    res.write("multiplication.txt")
+    res=m.division(n)
+    res.write("division.txt")
+except ValueError as v:
+    print(str(v))

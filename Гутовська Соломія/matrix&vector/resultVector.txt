@@ -1,0 +1,8 @@
+First vector :
+[32, 1, 4, -55, 7, 2]
+Second vector :
+[5, 8, -29, -8, 0, 14]
+Add vectors :
+[37, 9, -25, -63, 7, 16]
+Substract vectors :
+[27, -7, 33, -47, 7, -12]

@@ -1,0 +1,2 @@
+class ExceptionIsElementPresent(Exception):
+    pass

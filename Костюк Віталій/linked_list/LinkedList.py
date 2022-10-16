@@ -20,7 +20,6 @@ class Node:
         return self.data
 
 
-
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -35,7 +34,7 @@ class LinkedList:
             return out + ']'
         return 'LinkedList []'
 
-    def insertValues(self, data_list):
+    def insertDataList(self, data_list):
         self.head = None
         for data in data_list:
             self.insertAtEnd(data)

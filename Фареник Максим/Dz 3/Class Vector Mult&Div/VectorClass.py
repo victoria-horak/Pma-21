@@ -39,11 +39,16 @@ class Vector():
             raise IncorrectSize("Error!!! Vectors have different sizes!!!\n")
 
     def __truediv__(self, other):
-        if len(self.vector) == len(other.vector):
-            vector = [self.vector[iterator] / other.vector[iterator] for iterator in range(len(self.vector))]
-            return Vector(vector)
-        else:
-            raise IncorrectSize("Error!!! Vectors have different sizes!!!\n")
+        try:
+            if len(self.vector) == len(other.vector):
+                vector = [self.vector[iterator] / other.vector[iterator] for iterator in range(len(self.vector))]
+                return Vector(vector)
+            else:
+                raise IncorrectSize("Error!!! Vectors have different sizes!!!\n")
+        except ZeroDivisionError:
+            with open('result.txt', 'a+') as file:
+                file.write("Can't divide by zero!")
+                print("Can't divide by zero")
 
     def __str__(self):
         return str(self.vector)

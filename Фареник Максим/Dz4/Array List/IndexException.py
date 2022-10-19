@@ -1,0 +1,2 @@
+class IndexException(Exception):
+    pass

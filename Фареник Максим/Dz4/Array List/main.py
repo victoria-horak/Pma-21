@@ -13,32 +13,32 @@ try:
     arr.append(50)
     print(arr)
 
-    #Insert
+    # Insert
     print("Insert: ")
     arr.insert(1, 50)
     print(arr)
 
-    #Removing by index
+    # Removing by index
     print("Remove by index: ")
     arr.removeByIndex(1)
     print(arr)
 
-    #Removing by value
+    # Removing by value
     print("Remove by value: ")
     arr.remove(50)
     print(arr)
 
-    #Pop
+    # Pop
     print("Pop: ")
     arr.pop()
     print(arr)
 
-    #Clear
+    # Clear
     print("Clear: ")
     arr.clear()
     print(arr)
 
-    #Find item
+    # Find item
     print("Find item: ")
     arr.append(3)
     arr.append(4)

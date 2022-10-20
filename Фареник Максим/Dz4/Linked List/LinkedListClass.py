@@ -1,10 +1,12 @@
 from IndexException import IndexException
 
+
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
-        
+
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -16,23 +18,23 @@ class LinkedList:
             length += 1
             currentNode = currentNode.next
         return length
-    
+
     def isListEmpty(self):
         if self.head is None:
             return True
         else:
             return False
-    
+
     def insertEnd(self, newNode):
         if self.head is None:
             self.head = newNode
         else:
-           lastNode = self.head
-           while True:
-               if lastNode.next is None:
+            lastNode = self.head
+            while True:
+                if lastNode.next is None:
                     break
-               lastNode = lastNode.next
-           lastNode.next = newNode
+                lastNode = lastNode.next
+            lastNode.next = newNode
 
     def insertHead(self, newNode):
         tempNode = self.head
@@ -100,10 +102,10 @@ class LinkedList:
             currentNode = currentNode.next
         if flag == 0:
             print("Item is not found")
-    
+
     def clear(self):
         self.__init__()
-        
+
     def reverse(self):
         previousNode = None
         currentNode = self.head
@@ -119,9 +121,8 @@ class LinkedList:
             print("Linked list is empty")
         currentNode = self.head
         temp = ""
-        for i in range (self.listLength()):
+        for i in range(self.listLength()):
             temp += str(currentNode.data) + ","
             currentNode = currentNode.next
         temp = temp[:-1]
         return "[" + temp + "]"
-

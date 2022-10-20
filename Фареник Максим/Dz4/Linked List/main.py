@@ -4,7 +4,7 @@ from IndexException import IndexException
 
 linkedList = LinkedList()
 try:
-    #End insertion
+    # End insertion
     firstNode = Node(10)
     linkedList.insertEnd(firstNode)
     secondNode = Node(20)
@@ -14,13 +14,13 @@ try:
     print("End insertion: ")
     print(linkedList)
 
-    #Head insertion
+    # Head insertion
     fourthNode = Node(4)
     linkedList.insertHead(fourthNode)
     print("Head insertion: ")
     print(linkedList)
 
-    #Index insertion
+    # Index insertion
     fifthNode = Node(68)
     linkedList.insertAt(fifthNode, 3)
     sixthNode = Node(15)
@@ -28,35 +28,34 @@ try:
     print("Index insertion: ")
     print(linkedList)
 
-    #Reverse
+    # Reverse
     linkedList.reverse()
     print("Reverse list: ")
     print(linkedList)
 
-    #End delete
+    # End delete
     linkedList.deleteEnd()
     print("End delete: ")
     print(linkedList)
 
-    #Head delete
+    # Head delete
     linkedList.deleteHead()
     print("Head delete: ")
     print(linkedList)
 
-    #Index delete
+    # Index delete
     print("Index delete: ")
     linkedList.deleteAt(1)
     print(linkedList)
 
-    #Find
+    # Find
     print("Finding the element in the list: ")
     print(linkedList.find(10))
     print("\n")
-    #Clear
+    # Clear
     print("Clear the list: ")
     linkedList.clear()
     print(linkedList)
 
 except IndexException as e:
     print(e)
-

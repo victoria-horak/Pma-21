@@ -87,4 +87,4 @@ class ArrayList:
         if flag == 1:
             return i
         else:
-            return -1
+            raise IndexException("Item isn't found")

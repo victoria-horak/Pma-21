@@ -1,0 +1,6 @@
+class InvalidIndexException(Exception):
+    pass
+
+
+
+

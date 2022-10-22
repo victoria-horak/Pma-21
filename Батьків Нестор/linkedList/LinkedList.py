@@ -3,17 +3,22 @@ from node import Node
 
 class LinkedList:
     def __init__(self, inputvalue):
-        self.head = self.parse(inputvalue) if inputvalue else None
+        self.parse(inputvalue)
 
     def parse(self, input_value):
         if isinstance(input_value, str):
             input_value = input_value.split(" ")
+
         if isinstance(input_value, list):
-            input_value = input_value[::-1]
             current = None
             for elem in input_value:
-                current = Node(elem, current)
-            return current
+                if current == None:
+                    current = Node(elem)
+                    self.head = current
+                else:
+                    current.next = Node(elem)
+                    current.next.prev = current
+                    current = current.next
 
     def get_last(self):
         last = None
@@ -30,14 +35,20 @@ class LinkedList:
     def __str__(self):
         result = ""
         for elem in self:
-            result += f"{elem} -> "
-        return result[:-3]
+            result += f"{elem} <-> "
+        return result[:-4]
 
     def insert_at_start(self, *elements):
         elements = elements[::-1]
         current = self.head
         for elem in elements:
-            current = Node(elem, current)
+            if current == None:
+                current = Node(elem)
+            else:
+                current.prev = Node(elem)
+                current.prev.next = current
+                current = current.prev
+
         self.head = current
         return self
 
@@ -49,31 +60,31 @@ class LinkedList:
 
         for elem in elements:
             current.next = Node(elem)
+            current.next.prev = current
             current = current.next
         return self
 
     def insert(self, index, *elements):
-        current = self[index-1]
-        if current == None or index == 0:
+        if index == 0:
             self.insert_at_start(*elements)
             return self
+        current = self[index-1]
         end = current.next
         for elem in elements:
             current.next = Node(elem)
+            current.next.prev = current
             current = current.next
+
         current.next = end
+        end.prev = current
         return self
 
     def reverse(self):
-        previous = None
-        next = None
         current = self.head
         while current:
-            next = current.next
-            current.next = previous
-            previous = current
-            current = next
-        self.head = previous
+            if current.next == None:
+                self.head = current
+            current.next, current.prev, current = current.prev, current.next, current.next
         return self
 
     def __len__(self):
@@ -87,12 +98,12 @@ class LinkedList:
         if index < 0:
             index = len(self)+index
             if index < 0:
-                return self.head
+                raise IndexError()
         for elem in self:
             if ind == index:
                 return elem
             ind += 1
-        # return self.get_last()
+        raise IndexError()
 
     def clear(self):
         self.head = None
@@ -107,12 +118,15 @@ class LinkedList:
                 end_index = length+end_index
         if end_index < start_index:
             start_index, end_index = end_index, start_index
+
         start = self[start_index-1]
         end = self[end_index]
         if self[start_index] == self.head:
             self.head = end
+            end.prev = None
         else:
             start.next = end
+            end.prev = start
         return self
 
     def __contains__(self, element):
@@ -122,18 +136,19 @@ class LinkedList:
         return False
 
     def remove_entries(self, element, entries=1):
-        previous = None
         for node in self:
             if node.value == element:
-                if previous == None:
-                    self.head = node.next
+                if node.prev != None:
+                    if node.next != None:
+                        node.next.prev = node.prev
+                    node.prev.next = node.next
                 else:
-                    previous.next = node.next
+                    self.head = node.next
+                    if node.next != None:
+                        node.next.prev = None
                 entries -= 1
                 if entries == 0:
                     break
-            else:
-                previous = node
         return self
 
     @classmethod

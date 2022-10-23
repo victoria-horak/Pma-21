@@ -39,9 +39,6 @@ class Vector:
             result[i] = (self.vector[i] + other.get_vector()[i])
         return result
 
-    def __add__(self, other):
-        return self.add(other)
-
     def subtract(self, other):
         result = []
         for i in range(len(self.vector)):
@@ -50,5 +47,20 @@ class Vector:
             result[i] = (self.vector[i] - other.get_vector()[i])
         return result
 
-    def __sub__(self, other):
-        return self.subtract(other)
+    def multiply(self, other):
+        result = []
+        for i in range(len(self.vector)):
+            result.append(0)
+        for i in range(len(self.vector)):
+            result[i] = self.vector[i] * other.get_vector()[i]
+        return result
+
+    def divide(self, other):
+        result = []
+        for i in range(len(self.vector)):
+            result.append(0)
+        for i in range(len(self.vector)):
+            if other.get_vector()[i] == 0:
+                raise DifferentSize("Can't divide by zero!")
+            result[i] = self.vector[i] / other.get_vector()[i]
+        return result

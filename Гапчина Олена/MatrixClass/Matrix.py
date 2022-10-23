@@ -56,9 +56,26 @@ class Matrix:
                 result[j][i] = self.matrix[i][j]
         return result
 
+   # only for 2x2 matrix
+    def matrix_determinant(self):
+        if len(self.matrix) != 2 or len(self.matrix[0]) != 2:
+            raise WrongSize("Sorry, this only works for 2x2 matrices...")
+        return self.matrix[0][0] * self.matrix[1][1] - self.matrix[0][1] * self.matrix[1][0]
+
+    # only for 2x2 matrix
+    def inverse_matrix(self):
+        determinant = Matrix(self.matrix).matrix_determinant()
+        if determinant == 0:
+            raise WrongSize("Determinant = 0, so inverse matrix doesn't exist.")
+        if len(self.matrix) != 2 or len(self.matrix[0]) != 2:
+            raise WrongSize("Sorry, this only works for 2x2 matrices...")
+        return [[self.matrix[1][1] / determinant, -1 * self.matrix[0][1] / determinant],
+                [-1 * self.matrix[1][0] / determinant, self.matrix[0][0] / determinant]]
+
+    # only for 2x2 matrix
     @staticmethod
-    def divide_matrices(m1, m2):
-        return Matrix(m1.multiply(Matrix(m2.transpose())))
+    def divide_matrices(first, second):
+        return Matrix(first.multiply(Matrix(second.inverse_matrix())))
 
     def print(self):
         for row_iterator in range(len(self.matrix)):

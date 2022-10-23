@@ -1,0 +1,2 @@
+class InvalidSize(Exception):
+    pass

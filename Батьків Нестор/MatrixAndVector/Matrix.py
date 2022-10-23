@@ -47,7 +47,7 @@ class Matrix:
 
     def fromString(self, string):
         string = re.sub("(\n|^)\s*", "\n", string)
-        string = re.sub("(^ *\n)|(\n *$)", "", string)
+        string = re.sub("(^ *\n)|(\n* *$)", "", string)
         height = string.count("\n") + 1
         read_list = re.sub("\s+", " ", string).split(" ")
         return self.fromList(read_list, height)
@@ -75,6 +75,7 @@ class Matrix:
 
     @ matrix.setter
     def matrix(self, input_value):
+        #print(f"InputValue {input_value}")
         if isinstance(input_value, str):
             self._matrix = self.fromString(input_value)
         elif isinstance(input_value, list):
@@ -177,3 +178,46 @@ class Matrix:
 
     def toFile(self, filePath, overwrite=False):
         self.toFile_Static(self, filePath, overwrite)
+
+    @staticmethod
+    def multiply(matrix_a, matrix_b):
+        if matrix_a.width != matrix_b.height:
+            raise diffrentDimensionsException(
+                "Matrix first with and matrix second height must be equal")
+        newMatrix = []
+        for i in range(matrix_a.height):
+            newMatrix.append([0]*matrix_b.width)
+            for j in range(matrix_b.width):
+                for n in range(matrix_a.width):
+                    newMatrix[i][j] = matrix_a.at(i, n) * \
+                        matrix_b.at(n, j) + newMatrix[i][j]
+        return Matrix(newMatrix)
+
+    def __mul__(self, matrix_b):
+        return Matrix.multiply(self, matrix_b)
+
+    @staticmethod
+    def get_filled_matrix(width, height, filler=0):
+        return Matrix([[filler]*width for _ in range(height)])
+
+    def set_value(self, x, y, value):
+        # print(f"id1 {id(self._matrix[y])}")
+        # print(f"id2 {id(self._matrix[y+1])}")
+
+        self._matrix[x][y] = value
+        return self
+
+    @staticmethod
+    def get_identity_matrix(width):
+        new_matrix = Matrix.get_filled_matrix(width, width)
+        for n in range(width):
+            new_matrix.set_value(n, n, 1)
+        return new_matrix
+
+    @staticmethod
+    @Convert
+    def divide(matrix_a, matrix_b):
+        return matrix_a * matrix_b.transpose
+
+    def __truediv__(self, matrix_b):
+        return Matrix.divide(self, matrix_b)

@@ -14,7 +14,7 @@ class Vector:
 
     def fromList(self, rawList):
         try:
-            self._vector = [int(i) for i in rawList]
+            self._vector = [float(i) for i in rawList]
         except ValueError:
             raise ValueError("Element of Vector must be int!")
 
@@ -104,6 +104,12 @@ class Vector:
 
     def scalar_mult(self, mult):
         return Vector([int(i) * mult for i in self.vector])
+
+    def __mul__(self, mult):
+        return self.scalar_mult(mult)
+
+    def __truediv__(self, divisor):
+        return self.scalar_mult(1/divisor)
 
     @staticmethod
     def toFile_Static(matrix, filePath, overwrite=False):

@@ -37,8 +37,7 @@ class LinkedList:
     def at(self, index):
         try:
             tempIndex = 0
-            maxIndex = self.__len__()
-            maxIndex -= 1
+            maxIndex = self.__len__() - 1
             currentNode = self.head
             if not isinstance(index, int):
                 raise ValueError

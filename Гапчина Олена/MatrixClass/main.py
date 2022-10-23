@@ -28,12 +28,9 @@ try:
     matrix_division = Matrix.divide_matrices(first_matrix, second_matrix)
     matrix_division.print()
     matrix_division.write_to_file("matrix_division.txt")
+    
 except WrongSize as error:
     print(error)
     file = open("errors.txt", 'w')
     file.write(str(error))
     file.close()
-
-print("\nB^(-1):")
-transposed_second_matrix = Matrix(second_matrix.transpose())
-transposed_second_matrix.print()

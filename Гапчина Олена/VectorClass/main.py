@@ -15,11 +15,11 @@ try:
     vector_subtraction = Vector(first_vector.subtract(second_vector))
     vector_subtraction.write_to_file("vector_subtraction.txt")
 
-    vector_sum = Vector(first_vector.multiply(second_vector))
-    vector_sum.write_to_file("vector_multiplication.txt")
+    vector_multiplication = Vector(first_vector.multiply(second_vector))
+    vector_multiplication.write_to_file("vector_multiplication.txt")
 
-    vector_sum = Vector(first_vector.divide(second_vector))
-    vector_sum.write_to_file("vector_division.txt")
+    vector_division = Vector(first_vector.divide(second_vector))
+    vector_division.write_to_file("vector_division.txt")
     
 except DifferentSize as error:
     print(error)

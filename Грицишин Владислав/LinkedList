@@ -1,0 +1,93 @@
+class Node:
+    def __init__(self,a=0,prev=None,next=None):
+        self.data=a
+        self.prev=prev
+        self.next=next
+
+
+class Linkedlist:
+    def __init__(self):
+        self.head=None
+
+    def addelements (self,n):
+        item=Node(n)
+        h=self.head
+        if self.head is None:
+            self.head=item
+        else:
+            while h.next is not None:
+                h=h.next
+            item.prev=h
+            h.next=item
+
+
+    def addstart (self,n):
+        item = Node(n)
+        item.next=self.head
+        self.head.prev=item
+        self.head=item
+
+
+
+    def add (self,n,pos):
+        h=self.head
+        if pos==0:
+            self.addstart(n)
+            return
+        for i in range(pos-1):
+            if h.next is not None:
+                h=h.next
+            else:
+                raise ValueError ("Not correct index")
+        item = Node(n, prev=h, next=h.next)
+        if h.next is not None:
+            item.next.prev=item
+        h.next = item
+
+
+
+
+
+    def output(self):
+        h=self.head
+        while h is not None:
+            print(h.data,end=" ")
+            h=h.next
+        print()
+
+
+    def deleteindx(self,pos):
+        if pos==0:
+            if self.head is None:
+                print("List is empty")
+            else:
+                self.head=self.head.next
+                self.head.prev=None
+        else:
+            h=self.head
+            for i in range(pos-1):
+                h=h.next
+                if h is None:
+                    raise ValueError ("Position is not correct")
+            if h.next is None:
+                raise ValueError ("Position is not correct")
+            if h.next.next is not None:
+                h.next=h.next.next
+                h.next.prev=h
+            else:
+                h.next=None
+
+
+
+
+try:
+    l=Linkedlist()
+    l.addelements(4)
+    l.addelements(5)
+    l.addstart(2)
+    l.add(3,3)
+    l.output()
+    l.deleteindx(2)
+    l.output()
+except ValueError as v:
+    print(v)

@@ -59,7 +59,7 @@ class Matrix:
    # only for 2x2 matrix
     def matrix_determinant(self):
         if len(self.matrix) != 2 or len(self.matrix[0]) != 2:
-            raise WrongSize("Sorry, this only works for 2x2 matrices...")
+            raise WrongSize("Sorry, it only works for 2x2 matrices...")
         return self.matrix[0][0] * self.matrix[1][1] - self.matrix[0][1] * self.matrix[1][0]
 
     # only for 2x2 matrix
@@ -68,7 +68,7 @@ class Matrix:
         if determinant == 0:
             raise WrongSize("Determinant = 0, so inverse matrix doesn't exist.")
         if len(self.matrix) != 2 or len(self.matrix[0]) != 2:
-            raise WrongSize("Sorry, this only works for 2x2 matrices...")
+            raise WrongSize("Sorry, it only works for 2x2 matrices...")
         return [[self.matrix[1][1] / determinant, -1 * self.matrix[0][1] / determinant],
                 [-1 * self.matrix[1][0] / determinant, self.matrix[0][0] / determinant]]
 

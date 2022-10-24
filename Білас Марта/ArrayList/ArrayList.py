@@ -29,6 +29,19 @@ class ArrayList:
     def isFull(self):
         return self.array[self.capacity() - 1] is not None
 
+    def clear(self):
+        self.__init__()
+
+    def at(self, index):
+        try:
+            if index >= self.length() or index < 0:
+                raise IndexError
+            for i in range(self.length()):
+                if i == index:
+                    return self.array[i]
+        except IndexError:
+            print("out of range")
+
     def increaseCapacity(self):
         tempArray = [None] * round(len(self.array) * 1.5 + 1)
         for i in range(len(self.array)):
@@ -46,7 +59,7 @@ class ArrayList:
         for value in values:
             if tempArray.isFull():
                 tempArray.increaseCapacity()
-            for i in range(self.length()):
+            for i in range(self.capacity()):
                 if self.array[i] != value:
                     tempArray.append(self.array[i])
             self.array = tempArray.array
@@ -54,31 +67,40 @@ class ArrayList:
 
     def eraseFirst(self, *values):
         tempArray = ArrayList()
-        counter = 0
         for value in values:
+            flag = 0
             if tempArray.isFull():
                 tempArray.increaseCapacity()
-            for i in range(self.length()):
-                if self.array[i] == value:
-                    counter += 1
-                if counter != 1:
+            for i in range(self.capacity()):
+                if self.array[i] == value and flag == 0:
+                    flag += 1
+                else:
                     tempArray.append(self.array[i])
-                counter=0
             self.array = tempArray.array
             tempArray.__init__()
 
     def popFront(self, index):
-        tempArray = ArrayList()
-        for i in range(index, self.length()):
-            if tempArray.isFull():
-                tempArray.increaseCapacity()
-            tempArray.append(self.array[i])
-        self.array = tempArray.array
+        try:
+            if index > self.length() or index < 0:
+                raise IndexError
+            tempArray = ArrayList()
+            for i in range(index, self.capacity()):
+                if tempArray.isFull():
+                    tempArray.increaseCapacity()
+                tempArray.append(self.array[i])
+            self.array = tempArray.array
+        except IndexError:
+            print("out of range")
 
     def popBack(self, index):
-        tempArray = ArrayList()
-        for i in range(0, self.length() - index):
-            if tempArray.isFull():
-                tempArray.increaseCapacity()
-            tempArray.append(self.array[i])
-        self.array = tempArray.array
+        try:
+            if index > self.length() or index < 0:
+                raise IndexError
+            tempArray = ArrayList()
+            for i in range(0, self.length() - index):
+                if tempArray.isFull():
+                    tempArray.increaseCapacity()
+                tempArray.append(self.array[i])
+            self.array = tempArray.array
+        except IndexError:
+            print("out of range")

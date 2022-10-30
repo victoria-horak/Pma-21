@@ -1,0 +1,2 @@
+class SideTriangleExeption(Exception):
+    pass

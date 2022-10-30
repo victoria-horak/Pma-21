@@ -1,2 +1,0 @@
-class InvalidSizes(Exception):
-    pass

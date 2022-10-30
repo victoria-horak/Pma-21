@@ -1,0 +1,6 @@
+class InvalidShapeException(Exception):
+    pass
+
+
+
+

@@ -1,0 +1,2 @@
+class SideLengthError(Exception):
+    pass

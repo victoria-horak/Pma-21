@@ -1,2 +1,0 @@
-class SideLengthError(Exception):
-    pass

@@ -8,7 +8,7 @@ class WrongParameters(Exception):
 
 class Rectangle(Figure):
 
-    def __init__(self, color: Color = "blue", firstSide=0, secondSide=0):
+    def __init__(self, color: Color = Blue(), firstSide=0, secondSide=0):
         try:
             if firstSide <= 0 or secondSide <= 0:
                 raise WrongParameters
@@ -18,14 +18,14 @@ class Rectangle(Figure):
             print("this value must be number")
         except WrongParameters:
             print("wrong parameters")
-        self.color = Color(color)
+        self.color = color
 
     def __str__(self):
         result = "Rectangle:" + '\n'
         result += "side 1: " + str(self.firstSide) + " side 2: " + str(self.secondSide) + '\n'
         result += "color: " + self.color.getColor() + '\n'
         result += "perimeter: " + str(self.perimeter()) + '\n'
-        result += "area: " + str(self.area())
+        result += "area: " + str(self.area()) + '\n'
         return result
 
     def perimeter(self):
@@ -41,4 +41,5 @@ class Rectangle(Figure):
             turtle.right(90)
             turtle.forward(self.secondSide)
             turtle.right(90)
+        time.sleep(3)
         turtle.Screen().reset()

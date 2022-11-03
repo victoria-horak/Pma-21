@@ -2,7 +2,7 @@ from node import Node
 
 
 class LinkedList:
-    def __init__(self, inputvalue):
+    def __init__(self, inputvalue=None):
         self.parse(inputvalue)
 
     def parse(self, input_value):
@@ -19,6 +19,8 @@ class LinkedList:
                     current.next = Node(elem)
                     current.next.prev = current
                     current = current.next
+        elif input_value == None:
+            self.head = None
 
     def get_last(self):
         last = None
@@ -35,8 +37,8 @@ class LinkedList:
     def __str__(self):
         result = ""
         for elem in self:
-            result += f"{elem} <-> "
-        return result[:-4]
+            result += f"{elem}  "
+        return result
 
     def insert_at_start(self, *elements):
         elements = elements[::-1]
@@ -107,9 +109,10 @@ class LinkedList:
 
     def clear(self):
         self.head = None
+        return self
 
     def remove(self, start_index, end_index=None):
-        end_index = end_index or start_index+1
+        end_index = end_index or start_index
         if start_index ^ end_index < 0:
             length = len(self)
             if start_index < 0:
@@ -119,14 +122,14 @@ class LinkedList:
         if end_index < start_index:
             start_index, end_index = end_index, start_index
 
-        start = self[start_index-1]
+        start = self[start_index]
         end = self[end_index]
-        if self[start_index] == self.head:
-            self.head = end
-            end.prev = None
+        if start.prev:
+            start.prev.next = end.next
         else:
-            start.next = end
-            end.prev = start
+            self.head = end.next
+        if end.next:
+            end.next.prev = start.prev
         return self
 
     def __contains__(self, element):
@@ -138,17 +141,21 @@ class LinkedList:
     def remove_entries(self, element, entries=1):
         for node in self:
             if node.value == element:
-                if node.prev != None:
-                    if node.next != None:
-                        node.next.prev = node.prev
-                    node.prev.next = node.next
-                else:
+                if node.prev == None:
                     self.head = node.next
-                    if node.next != None:
-                        node.next.prev = None
+                node.delete()
                 entries -= 1
                 if entries == 0:
                     break
+        return self
+
+    def remove_entries_all(self, *elements):
+        for node in self:
+            if node.value in elements:
+                if node.prev == None:
+                    self.head = node.next
+                node.delete()
+
         return self
 
     @classmethod

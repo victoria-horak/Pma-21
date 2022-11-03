@@ -7,3 +7,12 @@ class Node:
 
     def __str__(self):
         return str(self.value)
+
+    def delete(self):
+        if self.prev != None:
+            if self.next != None:
+                self.next.prev = self.prev
+            self.prev.next = self.next
+        else:
+            if self.next != None:
+                self.next.prev = None

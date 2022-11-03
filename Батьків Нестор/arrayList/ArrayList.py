@@ -2,7 +2,7 @@ import re
 
 
 class ArrayList:
-    def __init__(self, size=10):
+    def __init__(self, size=1):
         self.max_size = size
         self.list = [None] * size
         self.size = 0
@@ -63,12 +63,26 @@ class ArrayList:
         return count
 
     def remove_entries(self, to_remove, entries=1):
-        for index in range(self.size):
+        index = 0
+        while index < self.size:
             if self[index] == to_remove:
                 del self[index]
                 entries -= 1
                 if entries == 0:
                     break
+            else:
+                index += 1
+
+        return self
+
+    def remove_entries_all(self, *to_remove):
+        index = 0
+        while index < self.size:
+            if self[index] in to_remove:
+                del self[index]
+            else:
+                index += 1
+
         return self
 
     def __contains__(self, value):

@@ -11,14 +11,14 @@ class Color(ABC):
 
 class Green(Color):
     def __init__(self):
-        self.color = Color.__init__("green")
+        Color.__init__(self, "green")
 
 
 class Blue(Color):
     def __init__(self):
-        self.color = Color.__init__("blue")
+        Color.__init__(self, "blue")
 
 
 class Purple(Color):
     def __init__(self):
-        self.color = Color.__init__("purple")
+        Color.__init__(self, "purple")

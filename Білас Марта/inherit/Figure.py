@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from Color import *
+import time
 
 
 class Figure(ABC):

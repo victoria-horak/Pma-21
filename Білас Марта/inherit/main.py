@@ -3,18 +3,18 @@ from Square import *
 from Circle import *
 from Triangle import *
 
-square = Square("blue", 100)
+square = Square(Blue(), 100)
 print(square)
 square.draw()
 
-circle = Circle("green", 50)
+circle = Circle(Green(), 50)
 print(circle)
 circle.draw()
 
-rectangle = Rectangle("purple", 50, 20)
+rectangle = Rectangle(Purple(), 50, 20)
 print(rectangle)
 rectangle.draw()
 
-triangle = Triangle("blue", 60, 60, 60)
+triangle = Triangle(Blue(), 30, 40, 50)
 print(triangle)
 triangle.draw()

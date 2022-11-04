@@ -1,0 +1,121 @@
+from abc import ABC, abstractmethod
+from math import sqrt, pi
+class Figure(ABC):
+    def __init__(self, color):
+        self.color=color
+
+
+    def draw (self):
+        print("Figure",end=" ")
+        self.color.paint()
+
+
+    @abstractmethod
+    def square(self):
+        pass
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Triangle(Figure):
+    def __init__(self,color,a,b,c):
+        super().__init__(color)
+        self.a=a
+        self.b=b
+        self.c=c
+
+
+    def square(self):
+        p=self.perimeter()/2
+        return sqrt(p*(p-self.a)*(p-self.b)*(p-self.c))
+
+
+    def perimeter(self):
+        return self.a+self.b+self.c
+
+    def draw(self):
+        Figure.draw(self)
+        print("Triangle Square = ",self.square()," Perimeter = ", self.perimeter())
+
+class Square(Figure):
+    def __init__(self,color,a):
+        super().__init__(color)
+        self.a=a
+
+
+    def square(self):
+        return self.a*self.a
+
+    def perimeter(self):
+        return 4*self.a
+
+    def draw(self):
+        Figure.draw(self)
+        print("Square Square = ",self.square()," Perimeter = ", self.perimeter())
+
+
+class Color:
+    def paint(self):
+        print("color is ",end=" ")
+
+
+class Red(Color):
+    def paint(self):
+        Color.paint(self)
+        print("Red")
+
+class Blue(Color):
+    def paint(self):
+        Color.paint(self)
+        print("Blue")
+
+class Yellow(Color):
+    def paint(self):
+        Color.paint(self)
+        print("Yellow")
+
+
+class Rectangle(Figure):
+    def __init__(self,color,a,b):
+        super().__init__(color)
+        self.a=a
+        self.b=b
+
+    def square(self):
+        return self.a*self.b
+
+    def perimeter(self):
+        return 2*self.a+2*self.b
+
+    def draw(self):
+        Figure.draw(self)
+        print("Rectangle Square = ",self.square()," Perimeter = ", self.perimeter())
+
+
+class Circle(Figure):
+    def __init__(self,color,r):
+        super().__init__(color)
+        self.r=r
+
+    def square(self):
+        return pi*self.r**2
+
+    def perimeter(self):
+        return 2*pi*self.r
+
+    def draw(self):
+        Figure.draw(self)
+        print("Circle Square = ",self.square()," Perimeter = ", self.perimeter())
+
+
+
+red=Red()
+blue=Blue()
+yellow=Yellow()
+t=Triangle(red,4,4,4)
+s=Square(blue,2)
+r=Rectangle(yellow,2,4)
+c=Circle(red,5)
+l=[t,s,r,c]
+for i in l:
+    i.draw()

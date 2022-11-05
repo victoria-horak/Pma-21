@@ -1,0 +1,2 @@
+class NoPeopleException(Exception):
+    pass

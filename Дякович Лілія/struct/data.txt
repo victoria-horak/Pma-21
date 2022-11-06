@@ -1,0 +1,4 @@
+Yra Kor 2 3 4 1
+Lily Diak 2 3 4 5
+Vetal Kost 4 4 4 4
+A A 3 3 3 3

@@ -11,7 +11,7 @@ class Color(ABC):
 
 
 class Blue(Color):
-    def __init__(self, color='Blue'):
+    def __init__(self):
         self.color = color
 
     def print_color(self, color='Blue'):
@@ -19,7 +19,7 @@ class Blue(Color):
 
 
 class Green(Color):
-    def __init__(self, color='Green'):
+    def __init__(self):
         self.color = color
 
     def print_color(self, color='Green'):
@@ -27,7 +27,7 @@ class Green(Color):
 
 
 class Yellow(Color):
-    def __init__(self, color='Yellow'):
+    def __init__(self):
         self.color = color
 
     def print_color(self, color='Yellow'):

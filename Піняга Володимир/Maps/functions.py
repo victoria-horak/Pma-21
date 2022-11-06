@@ -1,4 +1,4 @@
-def read_from_file(file_name):  # name - key, mark - value
+def read_from_file(file_name):
     elements = dict()
     with open(file_name, "r") as file:
         for string in file:
@@ -21,7 +21,6 @@ def find_mark(elements, mark):
     if mark in elements.values():
         for name, designation in elements.items():
             if mark == designation:
-                print(str(elements[name]) + " : " + str(name))
-                # break
+                print(str(elements[name]) + " : " + str(name)                      
     else:
         print("This name is not present in elements dictionary")

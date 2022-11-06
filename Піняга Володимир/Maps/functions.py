@@ -23,4 +23,4 @@ def find_mark(elements, mark):
             if mark == designation:
                 print(str(elements[name]) + " : " + str(name)                      
     else:
-        print("This name is not present in elements dictionary")
+        print("This mark is not present in elements dictionary")

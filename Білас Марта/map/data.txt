@@ -1,0 +1,9 @@
+cooper, Cu
+iron, Fe
+nitrogen, N
+zinc, Zn
+neon, Ne
+sulfur, S
+oxygen, O
+carbon, C
+chlorine, Cl

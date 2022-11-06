@@ -1,6 +1,0 @@
-Dmytro Pidlisnyy 23 12 2003 3 3 4 5
-Ben Smith 12 01 2004 2 4 5 3
-Fil Foden 13 03 2004 4 4 3 5 4
-Erica Frimen 20 08 2004 3 2 3 4 4
-Paolo Houdini 16 04 2004 4 5 5 4 3
-Chicca Bee 14 12 2003 3 4 2 2 3

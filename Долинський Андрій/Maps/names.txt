@@ -1,0 +1,5 @@
+Cuprum:Cu
+Oxygen:O
+Aluminum:Al
+Platinum:Pl
+Argentum:Ag

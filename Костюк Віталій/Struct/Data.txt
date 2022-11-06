@@ -1,0 +1,3 @@
+Petrenko,Stepan,5 3 3 5
+Ivaniv,Dmytro,5 2 4 3
+Petriv,Max,5 5 4 2

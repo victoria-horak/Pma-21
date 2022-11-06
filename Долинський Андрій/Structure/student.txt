@@ -1,0 +1,4 @@
+Table Ihor 20.03.2002 3 3 3 4 2
+Spoon Alex 12.08.2003 4 4 3 5 5
+Fork Zeus 06.06.2002 2 5 5 3 3
+Knife Feud 02.12.2002 2 2 2 2 2

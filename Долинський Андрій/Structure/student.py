@@ -10,10 +10,6 @@ class Student:
 
     def __str__(self):
         string = ""
-        string += "Surname: " + self.surname + "\t"
-        string += "Name: " + self.name + "\t"
-        string += "Date of Birth: " + self.dateOfBirth + "\t"
-        string += "Grades: "
-        for i in self.gradesList:
-            string += str(i) + " "
+        string += "Surname: {} Name: {} Date of Birth: {} Grades: {} ".format(self.surname, self.name, self.dateOfBirth,
+                                                                              self.gradesList)
         return string

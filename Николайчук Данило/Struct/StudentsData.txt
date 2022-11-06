@@ -1,0 +1,6 @@
+Nykolaichuck,Danylo,2004,4;5;3;5
+Yesersky,Mark,2006,2;3;4;1
+Bilas,Marta,2004,5;4;5;3
+Nik,Nikolas,2000,5;3;2;1
+Brain,Jim,1996,1;2;5;4
+Kovalenko,Volodia,2001,5;3;4;5

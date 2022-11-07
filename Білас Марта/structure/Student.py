@@ -1,11 +1,12 @@
 from dataclasses import dataclass
+from datetime import date
 
 
 @dataclass
 class Student:
     surname: str
     name: str
-    dataOfBirth: str
+    dataOfBirth: date
     grades: list
 
     def output(self):

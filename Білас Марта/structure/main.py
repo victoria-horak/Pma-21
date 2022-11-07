@@ -1,4 +1,5 @@
 from Student import *
+from datetime import date
 
 
 def outputFromFile(allStudents):
@@ -11,7 +12,11 @@ def outputFromFile(allStudents):
                         grades = []
                         for grade in line[3].split(" "):
                             grades.append(int(grade))
-                        student = Student(line[0], line[1], line[2], grades)
+                        parsedDate = line[2].split(".")
+                        year = int(parsedDate[2])
+                        month = int(parsedDate[1])
+                        day = int(parsedDate[0])
+                        student = Student(line[0], line[1], date(year, month, day), grades)
                         allStudents.append(student)
         except ValueError:
             print("wrong element type")

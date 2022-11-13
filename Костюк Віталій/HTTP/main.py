@@ -5,7 +5,7 @@ app = FastAPI()
 
 
 @app.get("/")
-def home_page():
+def default_value():
     return "Hello"
 
 

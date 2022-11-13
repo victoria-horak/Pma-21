@@ -1,17 +1,19 @@
+from flask import Flask, request
 
-from fastapi import FastAPI
-
-app = FastAPI()
-
-
-@app.get("/")
-def hom_page():
-    return "Hello"
+app = Flask(__name__)
 
 
-@app.post("/")
-def hello_first_name(hello_first_name=None):
-    if hello_first_name is None:
-        return "Not give user"
-    else:
-        return "Hello " + hello_first_name
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'GET':
+        return 'Hello'
+    elif request.method == "POST":
+        data = request.form
+        if not data['first_name'] is None:
+            return "Incorrect data"
+        else:
+            return 'Hello  ' + data['first_name']
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

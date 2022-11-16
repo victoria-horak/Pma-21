@@ -2,7 +2,7 @@ from IndexException import IndexException
 
 
 class ArrayList:
-    def __init__(self, array=[]):
+    def __init__(self, array = []):
         self.array = array
         self.resize()
 

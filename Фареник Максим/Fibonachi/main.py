@@ -1,7 +1,7 @@
 class IncorrectLength(Exception):
     """Raised when the lengths is less or equal 0"""
 
-def fibonachi(first=0, second=1, length=3, line=""):
+def fibonachi(first = 0, second = 1, length = 3, line = ""):
     if length <= 0:
         raise IncorrectLength("Length is less or equal 0")
 
@@ -12,7 +12,7 @@ def fibonachi(first=0, second=1, length=3, line=""):
     line += str(nextnumber) + ", "
     return fibonachi(second, nextnumber, length-1, line) if length > 1 else line[:-2]
 
-f=open('data.txt', 'r')
+f = open('data.txt', 'r')
 f = f.read()
 num_array=(f.split(" "))
 
@@ -22,6 +22,6 @@ try:
 
 except IncorrectLength as e:
     print(e)
-    f=open('data.txt', 'a')
+    f = open('data.txt', 'a')
     f.write("\nError - Length is less or equal 0")
     f.close()

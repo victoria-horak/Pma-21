@@ -12,11 +12,11 @@ def outputFromFile(elements):
 
 def addElement(elements, key, element):
     try:
-        if key is None:
+        if key is None or element is None:
             raise TypeError
-        elements.update({elements[key]: key})
+        elements.update({elements[key]: element})
     except TypeError:
-        print("key is None")
+        print("value is None")
 
 
 def change(elements):
@@ -36,3 +36,4 @@ elements = change(elements)
 print(elements)
 key = input("enter symbol of element: ")
 print("full name of ", key, ":", elements.get(key, "there is not such element"))
+

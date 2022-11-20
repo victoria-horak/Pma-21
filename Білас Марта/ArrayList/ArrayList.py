@@ -87,7 +87,8 @@ class ArrayList:
             for i in range(index, self.capacity()):
                 if tempArray.isFull():
                     tempArray.increaseCapacity()
-                tempArray.append(self.array[i])
+                element = self.array[i]
+                tempArray.append(element)
             self.array = tempArray.array
         except IndexError:
             print("out of range")
@@ -97,10 +98,11 @@ class ArrayList:
             if index > self.length() or index < 0:
                 raise IndexError
             tempArray = ArrayList()
-            for i in range(0, self.length() - index):
+            for i in range(0, self.capacity() - index):
                 if tempArray.isFull():
                     tempArray.increaseCapacity()
                 tempArray.append(self.array[i])
             self.array = tempArray.array
         except IndexError:
             print("out of range")
+

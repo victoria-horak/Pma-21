@@ -55,15 +55,14 @@ class ArrayList:
             self.array[self.length()] = value
 
     def eraseAll(self, *values):
-        tempArray = ArrayList()
+        tempArray = [None] * self.capacity()
         for value in values:
-            if tempArray.isFull():
-                tempArray.increaseCapacity()
-            for i in range(self.capacity()):
+            index = 0
+            for i in range(self.length()):
                 if self.array[i] != value:
-                    tempArray.append(self.array[i])
-            self.array = tempArray.array
-            tempArray.__init__()
+                    tempArray[index] = self.array[i]
+                    index += 1
+            self.array = tempArray
 
     def eraseFirst(self, *values):
         tempArray = ArrayList()
@@ -83,13 +82,10 @@ class ArrayList:
         try:
             if index > self.length() or index < 0:
                 raise IndexError
-            tempArray = ArrayList()
-            for i in range(index, self.capacity()):
-                if tempArray.isFull():
-                    tempArray.increaseCapacity()
-                element = self.array[i]
-                tempArray.append(element)
-            self.array = tempArray.array
+            tempArray = [None] * self.capacity()
+            for i in range(index, self.length()):
+                tempArray[i - index] = self.array[i]
+            self.array = tempArray
         except IndexError:
             print("out of range")
 
@@ -97,12 +93,8 @@ class ArrayList:
         try:
             if index > self.length() or index < 0:
                 raise IndexError
-            tempArray = ArrayList()
-            for i in range(0, self.capacity() - index):
-                if tempArray.isFull():
-                    tempArray.increaseCapacity()
-                tempArray.append(self.array[i])
-            self.array = tempArray.array
+            for i in range(self.length() - index, self.length()):
+                self.array[i] = None
         except IndexError:
             print("out of range")
 

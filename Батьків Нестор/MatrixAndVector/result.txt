@@ -8,11 +8,6 @@ Matrix Second:
 0, 5, 0
 7, 0, 9
 
-Matrix Multiplication:
-4, 5, 16
-4, 5, 16
-4, 5, 16
-
 
 
 -------Vectors-----

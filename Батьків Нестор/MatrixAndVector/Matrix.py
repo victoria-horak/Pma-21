@@ -1,7 +1,8 @@
 import re
 from diffrentDimensionsException import diffrentDimensionsException
 from NotValidListException import NotValidListException
-
+from NotSquareMatrixException import NotSquareMatrixException
+from ZeroDetException import ZeroDetException
 
 class Matrix:
 
@@ -116,6 +117,43 @@ class Matrix:
                 newMatrix[column].append(self.at(row, column))
         return Matrix(newMatrix)
 
+    def det(self):
+        if self.height == 2 and self.width == 2 :
+            return self.at(0,0) * self.at(1,1) - self.at(0,1) * self.at(1,0)
+        
+        elif self.height == 3 and self.width == 3:
+            return self.at(0,0) * self.at(1,1) * self.at(2,2) + self.at(1,0) * self.at(2,1) * self.at(0,2) + self.at(0,1) * self.at(1,2)*self.at(2,0) -\
+            self.at(0,2) * self.at(1,1) * self.at(2,0) - self.at(0,1) * self.at(1,0) * self.at(2,2) - self.at(0,0) * self.at(1,2) * self.at(2,1)
+        raise diffrentDimensionsException("Cant find determinant of matrix with such sides")
+    
+    def inverse(self):
+        result = Matrix()
+        determinant = self.det()
+        if self.width != self.height:
+                raise NotSquareMatrixException("matrix is not square")
+        if determinant == 0:
+            raise ZeroDetException("Cant inverse matrix with determinant 0")
+        if len(self.matrix) == 2:
+                result = Matrix.get_filled_matrix(2,2,0)
+                result[0][0] = round(self[1][1]/determinant,2)
+                result[0][1] = round((-1)*self[0][1] / determinant,2)
+                result[1][0] = round((-1)*self[1][0] / determinant,2)
+                result[1][1] = round(self[0][0] / determinant,2)
+                return result
+        if len(self.matrix) == 3:
+                for i in range(3):
+                    row = []
+                    for j in range(3):
+                        element = round(((self[(j + 1) % 3][(i + 1) % 3] * self[(j + 2) % 3][(i + 2) % 3]) - (
+                                self[(j + 1) % 3][(i + 2) % 3] * self[(j + 2) % 3][
+                            (i + 1) % 3])) / determinant,3)
+                        row.append(element if element else 0 )
+                    result.matrix.append(row)
+                return result
+
+        
+        
+    
     @Convert
     def isSameDimensions(self, matrix):
         return self.width == matrix.width and self.height == matrix.height
@@ -190,8 +228,8 @@ class Matrix:
             newMatrix.append([0]*matrix_b.width)
             for j in range(matrix_b.width):
                 for n in range(matrix_a.width):
-                    newMatrix[i][j] = matrix_a.at(i, n) * \
-                        matrix_b.at(n, j) + newMatrix[i][j]
+                    newMatrix[i][j] = round(matrix_a.at(i, n) * \
+                        matrix_b.at(n, j) + newMatrix[i][j],2)
         return Matrix(newMatrix)
 
     def __mul__(self, matrix_b):
@@ -220,5 +258,7 @@ class Matrix:
     def divide(matrix_a, matrix_b):
         return matrix_a * matrix_b.transpose
 
+    def __getitem__(self,i):
+        return self._matrix[i]
     def __truediv__(self, matrix_b):
         return Matrix.divide(self, matrix_b)

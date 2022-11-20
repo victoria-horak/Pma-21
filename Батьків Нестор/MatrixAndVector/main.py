@@ -2,7 +2,7 @@ from Matrix import Matrix
 from Vector import Vector
 from Constants import PATH
 
-resultFile = PATH+"result.txt"
+resultFile = "result.txt"
 
 
 def add_to_file(text, filePath=resultFile):
@@ -13,19 +13,23 @@ def add_to_file(text, filePath=resultFile):
 with open(resultFile, "w") as file:
     file.write("")
 
-matrix_first = Matrix().fromFile(PATH + "Matrix.txt")
+matrix_first = Matrix().fromFile("Matrix.txt")
 matrix_second = Matrix("""
 1 0 3
 0 5 0
 7 0 9
 """)
 
+
 add_to_file("Matrix First:")
 Matrix.toFile_Static(matrix_first, resultFile)
 add_to_file("Matrix Second:")
 matrix_second.toFile(resultFile)
-add_to_file("Matrix Multiplication:")
-(matrix_first / matrix_second).toFile(resultFile)
+# add_to_file("Matrix Multiplication:")
+# (matrix_first / matrix_second).toFile(resultFile)
+#print(matrix_second.det())
+inversed_second = matrix_second.inverse()
+print(inversed_second * matrix_second)
 # matrix_second = Matrix.fromFile(Constants.PATH + "matrix.txt")
 
 
@@ -51,8 +55,8 @@ add_to_file("Matrix Multiplication:")
 # matrix_first.subMatrix(1, 0).toFile(resultFile)
 
 # Vectors
-vector_first = Vector.fromFile(PATH + "vector_second.txt")
-vector_second = Vector.fromFile(PATH + "vector.txt")
+vector_first = Vector.fromFile("vector_second.txt")
+vector_second = Vector.fromFile("vector.txt")
 
 add_to_file("\n\n-------Vectors-----\n")
 add_to_file("Vector First:")

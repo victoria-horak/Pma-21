@@ -1,2 +1,2 @@
 
-PATH = './Батьків Нестор/MatrixAndVector/'
+PATH = './Tasks/MatrixAndVector/'

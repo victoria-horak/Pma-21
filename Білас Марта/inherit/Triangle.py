@@ -1,10 +1,5 @@
 from Figure import *
 from math import *
-import turtle
-
-
-class WrongParameters(Exception):
-    pass
 
 
 class Triangle(Figure):
@@ -26,7 +21,8 @@ class Triangle(Figure):
 
     def __str__(self):
         result = "Triangle:" + '\n'
-        result += "side 1: " + str(self.firstSide) + " side 2: " + str(self.secondSide) + " side 3: " + str(
+        result += "first side: " + str(self.firstSide) + '\n' + "second side: " + '\n' + str(
+            self.secondSide) + '\n' + "third side: " + str(
             self.thirdSide) + '\n'
         result += "color: " + self.color.getColor() + '\n'
         result += "perimeter: " + str(self.perimeter()) + '\n'
@@ -45,7 +41,7 @@ class Triangle(Figure):
         return degrees(acos((secondSide ** 2 + thirdSide ** 2 - firstSide ** 2) / (
                 2.0 * secondSide * thirdSide)))
 
-    def canDraw (self):
+    def canDraw(self):
         return self.firstSide + self.secondSide > self.thirdSide and self.secondSide + self.thirdSide > self.firstSide \
                and self.thirdSide + self.firstSide > self.secondSide
 

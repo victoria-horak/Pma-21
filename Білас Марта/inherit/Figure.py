@@ -1,6 +1,10 @@
 from abc import ABC, abstractmethod
-from Color import *
+from Green import *
+from Blue import *
+from Purple import *
+from Exception import *
 import time
+import turtle
 
 
 class Figure(ABC):
@@ -18,10 +22,4 @@ class Figure(ABC):
         pass
 
     def changeColor(self, color):
-        try:
-            if color != "green" or color != "purple" or color != "blue":
-                raise ValueError
-            self.color = Color(color)
-        except ValueError:
-            print("there is not such color")
-
+        self.color.setColor(color)

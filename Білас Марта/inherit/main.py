@@ -6,6 +6,8 @@ from Triangle import *
 square = Square(Blue(), 100)
 print(square)
 square.draw()
+square.changeColor("purple")
+square.draw()
 
 circle = Circle(Green(), 50)
 print(circle)

@@ -1,9 +1,4 @@
 from Figure import *
-import turtle
-
-
-class WrongParameters(Exception):
-    pass
 
 
 class Rectangle(Figure):
@@ -22,7 +17,7 @@ class Rectangle(Figure):
 
     def __str__(self):
         result = "Rectangle:" + '\n'
-        result += "side 1: " + str(self.firstSide) + " side 2: " + str(self.secondSide) + '\n'
+        result += "first side: " + str(self.firstSide) + '\n' + "second side: " + str(self.secondSide) + '\n'
         result += "color: " + self.color.getColor() + '\n'
         result += "perimeter: " + str(self.perimeter()) + '\n'
         result += "area: " + str(self.area()) + '\n'

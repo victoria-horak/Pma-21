@@ -8,17 +8,5 @@ class Color(ABC):
     def getColor(self):
         return self.color
 
-
-class Green(Color):
-    def __init__(self):
-        Color.__init__(self, "green")
-
-
-class Blue(Color):
-    def __init__(self):
-        Color.__init__(self, "blue")
-
-
-class Purple(Color):
-    def __init__(self):
-        Color.__init__(self, "purple")
+    def setColor(self, color):
+        self.color = color

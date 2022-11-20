@@ -1,9 +1,4 @@
 from Figure import *
-import turtle
-
-
-class WrongParameters(Exception):
-    pass
 
 
 class Circle(Figure):

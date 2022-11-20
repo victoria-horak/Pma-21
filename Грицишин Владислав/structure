@@ -1,0 +1,35 @@
+class Student:
+    def __init__(self,name,surname,data,rating):
+        self.name=name
+        self.surname=surname
+        self.data=data
+        self.rating=rating
+
+
+    def ratingstudent(self):
+        return "2" in self.rating
+
+    def output(self):
+        print(f"Student: {self.name} {self.surname} {self.data} {self.rating}")
+
+
+
+def reading(filename):
+    student=[]
+    file=open(filename)
+    for i in file:
+        line= i.split()
+        s=Student(line[0],line[1],line[2],line[3::])
+        student.append(s)
+    file.close()
+    return student
+
+
+f=reading("Student.txt")
+for i in f:
+    i.output()
+l=[i for i in f if i.ratingstudent()]
+l.sort(key=lambda x: x.surname)
+print("Student with 2")
+for i in l:
+ i.output()

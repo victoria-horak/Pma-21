@@ -133,7 +133,12 @@ class Matrix:
                 return Matrix([])
             second_matrix = self.inversion_matrix3x3(second_matrix)
             return self.multiply(Matrix(second_matrix))
-
+        if len(second_matrix) == 1:
+            print("we cannot found this answer")
+            return Matrix([])
+        if len(second_matrix) > 3:
+            print("we cannot found this answer")
+            return Matrix([])
     @staticmethod
     def determinant_matrix3x3(matrix):
         determinant = 0

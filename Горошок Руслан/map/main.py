@@ -1,6 +1,6 @@
 def read_file(name_file):
 
-    chemical_elements = {}
+    chemical_elements = {None:"data","NOm":None,None:"date1"}
 
     with open(name_file, "r", encoding="utf8") as file:
         lines = file.readlines()
@@ -9,13 +9,19 @@ def read_file(name_file):
             first_elem = first_elem.replace("\n", "")
             second_elem = second_elem.replace("\n", "")
             chemical_elements[first_elem] = second_elem
+
     return chemical_elements
 
 
 file_name = "sources//data.txt"
 chemical_element = read_file(file_name)
 print(chemical_element)
-
+if chemical_element[None]:
+    del chemical_element[None]
+for key,value in chemical_element.items():
+    if value == None:
+        chemical_element.update({key:"Ok"})
+print(chemical_element)
 name_of_the_element = input("Enter the name of the element (to display the designation of this element): ")
 if name_of_the_element in chemical_element.keys():
     print(chemical_element[name_of_the_element])

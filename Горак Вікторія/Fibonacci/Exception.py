@@ -1,0 +1,2 @@
+class WrongLength(Exception):
+    pass

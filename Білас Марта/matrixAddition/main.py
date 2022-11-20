@@ -1,65 +1,70 @@
-class DifferentLength(Exception):
-    "matrixes have different lengthes"
-    pass
-
-def outputMatrixFromFile(matrix):
-    length = int(file.read(1))
-    lineOfMatrix = file.readline()
-    for rowIterator in range(0, length):
-        lineOfMatrix = file.readline()
-        line = lineOfMatrix.split(",")
-        row = []
-        for columnIterator in range(0, length):
-            element = int(line[columnIterator])
-            row.append(element)
-        matrix.append(row)
+from Excpetions import *
 
 
-def outputMatrixToFile(matrix):
-    for rowIterator in range(0, len(matrix)):
-         for columnIterator in range(0, len(matrix)):
-             resultFile.write(str(matrix[rowIterator][columnIterator]) + " ")
-         resultFile.write('\n')
-    resultFile.close()
+def outputMatrixFromFile(fileName):
+    resultMatrix = []
+    with open(fileName) as file:
+        try:
+            for line in file:
+                if not line.isspace():
+                    line = line.split(",")
+                    row = []
+                    for columnIterator in range(0, len(line)):
+                        element = int(line[columnIterator])
+                        row.append(element)
+                    resultMatrix.append(row)
+        except ValueError:
+            print("wrong element type")
+            resultMatrix.clear()
+    return resultMatrix
+
+
+def outputMatrixToFile(matrix, fileName):
+    try:
+        with open(fileName, "w") as file:
+            if matrix == []:
+                raise Empty
+            for i in range(0, len(matrix)):
+                file.write(str(matrix[i]) + " ")
+                file.write('\n')
+    except Empty:
+        print("vector is empty")
+
 
 def outputMatrix(matrix):
-    for rowIterator in range (0, len(matrix)):
+    for rowIterator in range(0, len(matrix)):
         print(matrix[rowIterator])
 
-def additionOfMatrixes(firstMatrix, secondMatrix,resultMatrix):
-    length = len(firstMatrix)
-    for rowIterator in range(0, length):
-        row = []
-        for columnIterator in range(0, length):
-            element = firstMatrix[rowIterator][columnIterator] + secondMatrix[rowIterator][columnIterator]
-            row.append(element)
-        resultMatrix.append(row)
 
-file = open("data.txt")
-firstMatrix = []
-outputMatrixFromFile(firstMatrix)
+def additionOfMatrixes(firstMatrix, secondMatrix):
+    resultMatrix = []
+    try:
+        if (len(firstMatrix) != len(secondMatrix)):
+            raise DifferentLength
+        length = len(firstMatrix)
+        for rowIterator in range(0, length):
+            row = []
+            for columnIterator in range(0, length):
+                element = firstMatrix[rowIterator][columnIterator] + secondMatrix[rowIterator][columnIterator]
+                row.append(element)
+            resultMatrix.append(row)
+    except DifferentLength:
+        print("matrixes have different length")
+    return resultMatrix
+
+
+file = "matrix1.txt"
+firstMatrix = outputMatrixFromFile(file)
 print("first matrix:")
 outputMatrix(firstMatrix)
 
-secondMatrix = []
-outputMatrixFromFile(secondMatrix)
+file = "matrix2.txt"
+secondMatrix = outputMatrixFromFile(file)
 print("second matrix:")
 outputMatrix(secondMatrix)
-file.close()
 
-resultFile = open("result.txt", "a")
-try:
-    if(len(firstMatrix) != len(secondMatrix)):
-        raise DifferentLength
-    resultMatrix = []
-    additionOfMatrixes(firstMatrix, secondMatrix, resultMatrix)
-    print("result matrix:")
-    outputMatrix(resultMatrix)
-    outputMatrixToFile(resultMatrix)
-except DifferentLength:
-    print("matrixes have different length")
-    resultFile.write("matrixes have different length"+"\n")
-    resultFile.close()
-
-
-
+resultFile = "result.txt"
+resultMatrix = additionOfMatrixes(firstMatrix, secondMatrix)
+print("result matrix:")
+outputMatrix(resultMatrix)
+outputMatrixToFile(resultMatrix, resultFile)

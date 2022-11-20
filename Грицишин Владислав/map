@@ -1,0 +1,23 @@
+elements={
+    "Litiy":"Li",
+    "Beriliy":"Be",
+    "Heliy":"He",
+    "Aurum":"Au",
+    "Brom":"B",
+    "Natriy":"Na",
+    None: "na"
+}
+print("The full list of elements:")
+print(elements)
+name=input("Input element \n")
+if name not in elements or elements[name] is None:
+    print("Dont have this element ")
+else:
+    print(elements[name])
+name2=input("Input index \n")
+if name2 not in elements.values():
+    print("Dont have element ")
+else:
+    for i in elements.keys():
+        if elements[i]==name2:
+            print(i)

@@ -1,0 +1,20 @@
+import socket
+sock = socket.socket()
+sock.bind(('', 8080))
+sock.listen(1)
+conn, addr = sock.accept()
+
+while True:
+    data = conn.recv(1024).decode()
+    message = "HTTP/1.0 200 OK\n\nHello User"
+    if not data:
+        break
+    if data.split() == 'Get':
+        message = "HTTP/1.0 200 OK\n\nHello User"
+    if data.split()[0] == 'POST':
+        user_name = data.split()[-2]
+        message = 'HTTP/1.0 200 OK\n\nHello ' + user_name
+
+    conn.sendall(message.encode())
+    conn.close()
+sock.close()

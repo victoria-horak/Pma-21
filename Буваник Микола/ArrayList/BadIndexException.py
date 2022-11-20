@@ -1,2 +1,0 @@
-class BadIndexExeption(Exception):
-    pass

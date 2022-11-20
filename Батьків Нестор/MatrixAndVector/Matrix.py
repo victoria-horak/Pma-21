@@ -46,6 +46,7 @@ class Matrix:
         return matrix
 
     def fromString(self, string):
+        string = re.sub(",", " ", string)
         string = re.sub("(\n|^)\s*", "\n", string)
         string = re.sub("(^ *\n)|(\n* *$)", "", string)
         height = string.count("\n") + 1

@@ -35,5 +35,5 @@ def fibonachi(first=0, second=1, length=1):
 
 fibonachi(1, 0, 3)
 fibonachi(-2, 5, -2)
-fibonachi(7, 12, 14)
-fibonachi(7, 16, 35)
+fibonachi(7, 12, 4)
+fibonachi(7, 16, 5)

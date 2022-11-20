@@ -1,8 +1,8 @@
 from Matrix import Matrix
 from Vector import Vector
-import Constants
+from Constants import PATH
 
-resultFile = Constants.PATH+"result.txt"
+resultFile = PATH+"result.txt"
 
 
 def add_to_file(text, filePath=resultFile):
@@ -13,14 +13,11 @@ def add_to_file(text, filePath=resultFile):
 with open(resultFile, "w") as file:
     file.write("")
 
-matrix_first = Matrix("""
-2 1 4
-0 1 1
-""")
+matrix_first = Matrix().fromFile(PATH + "Matrix.txt")
 matrix_second = Matrix("""
-6 3 1 
-1 1 0 
--2 5 0   
+1 0 3
+0 5 0
+7 0 9
 """)
 
 add_to_file("Matrix First:")
@@ -30,8 +27,7 @@ matrix_second.toFile(resultFile)
 add_to_file("Matrix Multiplication:")
 (matrix_first / matrix_second).toFile(resultFile)
 # matrix_second = Matrix.fromFile(Constants.PATH + "matrix.txt")
-vector_first = Vector.fromFile(Constants.PATH + "vector_second.txt")
-vector_second = Vector.fromFile(Constants.PATH + "vector.txt")
+
 
 # add_to_file("Matrix First:")
 # Matrix.toFile_Static(matrix_first, resultFile)
@@ -55,18 +51,22 @@ vector_second = Vector.fromFile(Constants.PATH + "vector.txt")
 # matrix_first.subMatrix(1, 0).toFile(resultFile)
 
 # Vectors
+vector_first = Vector.fromFile(PATH + "vector_second.txt")
+vector_second = Vector.fromFile(PATH + "vector.txt")
 
 add_to_file("\n\n-------Vectors-----\n")
 add_to_file("Vector First:")
 vector_first.toFile(resultFile)
 add_to_file("Vector Second:")
 vector_second.toFile(resultFile)
-# +
-add_to_file("Addition")
-Vector.toFile_Static(vector_first + vector_second, resultFile)
-# -
-add_to_file("Substraction")
-(vector_first - vector_second).toFile(resultFile)
+# # +
+# add_to_file("Addition")
+# Vector.toFile_Static(vector_first + vector_second, resultFile)
+# # -
+# add_to_file("Substraction")
+# (vector_first - vector_second).toFile(resultFile)
 # Mult by 6
-add_to_file("Multiply First Vector by 6")
-(vector_first / 6).toFile(resultFile)
+add_to_file("Multiply First Vector by Second vector")
+(vector_first * vector_second).toFile(resultFile)
+add_to_file("Divide First Vector by Second vector")
+(vector_first / vector_second).toFile(resultFile)

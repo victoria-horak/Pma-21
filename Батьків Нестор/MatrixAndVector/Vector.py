@@ -106,10 +106,16 @@ class Vector:
         return Vector([int(i) * mult for i in self.vector])
 
     def __mul__(self, mult):
-        return self.scalar_mult(mult)
+        if isinstance(mult, Vector):
+            return self.multiply(self, mult)
+        else:
+            return self.scalar_mult(mult)
 
     def __truediv__(self, divisor):
-        return self.scalar_mult(1/divisor)
+        if isinstance(divisor, Vector):
+            return self.divide(self, divisor)
+        else:
+            return self.scalar_mult(1/divisor)
 
     @staticmethod
     def toFile_Static(matrix, filePath, overwrite=False):
@@ -118,3 +124,21 @@ class Vector:
 
     def toFile(self, filePath, overwrite=False):
         self.toFile_Static(self, filePath, overwrite)
+
+    @staticmethod
+    def divide(vector_first, vector_second):
+        if not vector_first.isSameLength(vector_second):
+            raise diffrentDimensionsException("Vectors have diffrent length")
+        result = []
+        for i in range(vector_first.length):
+            result.append(vector_first.at(i) / vector_second.at(i))
+        return Vector(result)
+
+    @staticmethod
+    def multiply(vector_first, vector_second):
+        if not vector_first.isSameLength(vector_second):
+            raise diffrentDimensionsException("Vectors have diffrent length")
+        result = []
+        for i in range(vector_first.length):
+            result.append(vector_first.at(i) * vector_second.at(i))
+        return Vector(result)

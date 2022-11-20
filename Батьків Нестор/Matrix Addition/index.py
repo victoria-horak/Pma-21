@@ -8,6 +8,9 @@ class DIffrentDImensions(Exception):
 
 
 def string_to_matrix(string):
+    # var I - (^|\n)[ \n]*\n
+    string = re.sub("(\n|^)[\D]*", "\n", string)
+    string = re.sub("(^ *\n)|(\n$)", "", string)
     height = string.count("\n") + 1
     read_list = re.sub("\s+", " ", string).split(" ")
     length = len(read_list) / height
@@ -33,7 +36,8 @@ def matrix_addition(matrixA, matrixB):
         row = []
         iteratorJ = 0
         for matrix1elem in matrix1row:
-            row.append(int(matrix1elem) + int(matrixB[iteratorI][iteratorJ]))
+            row.append(int(matrix1elem) + matrixB[iteratorI][iteratorJ])
+
             iteratorJ += 1
         result_matrix.append(row)
         iteratorI += 1
@@ -55,8 +59,9 @@ def write_to_file(text, filePath):
     file.close()
 
 
-matrix1 = string_to_matrix(open(PATH+'matrix.txt').read())
-matrix2 = string_to_matrix(open(PATH+'matrix2.txt').read())
+matrix1 = string_to_matrix(open(PATH + 'matrix.txt').read())
+matrix2 = string_to_matrix(open(PATH + 'matrix2.txt').read())
+print("\nMatrix2:\n"+matrix_to_string(matrix2))
 try:
     write_to_file("Matrix1:\n"+matrix_to_string(matrix1) +
                   "\nMatrix2:\n"+matrix_to_string(matrix2) +

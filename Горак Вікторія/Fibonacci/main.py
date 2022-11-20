@@ -1,5 +1,4 @@
-class Wrong_length(Exception):
-    pass
+from Exception import *
 
 def fibonacci(*args):
     if len(args)==1:

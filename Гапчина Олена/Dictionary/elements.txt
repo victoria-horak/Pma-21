@@ -1,0 +1,5 @@
+Hydrogen H
+Lithium Li
+Beryllium Be
+Sodium Na
+Magnesium Mg

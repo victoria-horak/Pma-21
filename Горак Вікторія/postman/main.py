@@ -8,40 +8,40 @@ def hello_user():
     return 'Hello client'
 
 
-@app.route('/',methods=['POST'])
+@app.route('/', methods=['POST'])
 def hello_to_username():
-    data=request.args
-    if not data.__contains__('name'):
-        return 'Hello client'
+    client_host = request.args
+    if client_host.__contains__('name'):
+        return 'Hello ' + client_host['name']
     else:
-        return 'Hello ' + data['name']
+        return 'Hello client'
 
 
 @app.route('/header', methods=['POST'])
-def headers():
-    data = request.headers
-    if not data.__contains__('name'):
-        return 'Hello user'
+def headers_func():
+    client_host = request.headers
+    if client_host.__contains__('name'):
+        return 'Hello  ' + client_host['name']
     else:
-        return 'Hello  ' + data['name']
+        return 'Hello client'
 
 
 @app.route('/params', methods=['POST'])
-def params():
-    data = request.args
-    if not data.__contains__('name'):
-        return 'Hello user'
+def params_func():
+    client_host = request.args
+    if client_host.__contains__('name'):
+        return 'Hello  ' + client_host['name']
     else:
-        return 'Hello  ' + data['name']
+        return 'Hello client'
 
 
 @app.route('/json', methods=['POST'])
-def json():
-    data = request.json
-    if data is None or not data.__contains__('name'):
-        return 'Hello user'
+def json_func():
+    client_host = request.json
+    if client_host.__contains__('name'):
+        return 'Hello ' + client_host['name']
     else:
-        return 'Hello ' + data['name']
+        return 'Hello client'
 
 
 if __name__ == '__main__':

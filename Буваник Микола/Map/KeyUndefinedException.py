@@ -1,0 +1,2 @@
+class KeyUndefinedException(Exception):
+    pass

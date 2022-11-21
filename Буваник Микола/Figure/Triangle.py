@@ -1,6 +1,7 @@
 from Figure import *
 from SideTriangleExeption import SideTriangleExeption
 
+
 class Triangle(Figure):
     type = "Triangle"
 

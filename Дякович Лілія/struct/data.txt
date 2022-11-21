@@ -1,4 +1,4 @@
-Yra Kor 2 3 4 1
-Lily Diak 2 3 4 5
-Vetal Kost 4 4 4 4
-A A 3 3 3 3
+Yra Kor 2013 12 12 2 3 4 1
+Lily Diak 2004 8 11 2 3 4 5
+Vetal Kost 2006 3 08 4 4 4 4
+A A 2004 5 6 3 3 3 3

@@ -1,3 +1,5 @@
+import datetime
+
 from Struct import Student
 
 
@@ -23,7 +25,8 @@ def read(fileName=""):
             temp = [x for x in row.split(" ")]
             first_name = temp[0]
             second_name = temp[1]
-            grades = [int(x) for x in temp[2:len(temp)]]
-            mass.append(Student(first_name, second_name, grades))
+            data=datetime.date(int(temp[2]),int(temp[3]),int(temp[4]))
+            grades = [int(x) for x in temp[5:len(temp)]]
+            mass.append(Student(first_name, second_name, data, grades))
     return mass
 

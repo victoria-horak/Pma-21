@@ -1,30 +1,32 @@
-class InvalidValue(Exception):
-    pass
+from InvalidValueException import InvalidValueException
 
 
-def fibonachi(count_step=0, first_fibonachi=0, second_fibonachi=1):
+def fibonacci(count_step=0, first_fibonacci=0, second_fibonacci=1):
     if count_step == 0:
-        return first_fibonachi
+        return first_fibonacci
     if count_step == 1:
-        return second_fibonachi
+        return second_fibonacci
     else:
-        return (fibonachi(count_step - 1, first_fibonachi, second_fibonachi)
-                + fibonachi(count_step - 2, first_fibonachi, second_fibonachi))
+        return (fibonacci(count_step - 1, first_fibonacci, second_fibonacci)
+                + fibonacci(count_step - 2, first_fibonacci, second_fibonacci))
 
 
-first_fibonachi = int(input("Input first fibonachi = "))
-second_fibonachi = int(input("Input second fibonachi = "))
-step = int(input("Input count step = "))
-file_result = open("result.txt", 'a')
 try:
+    first_fibonacci = int(input("Input first fibonacci = "))
+    second_fibonacci = int(input("Input second fibonacci = "))
+    step = int(input("Input count step = "))
     if step < 0:
-        raise InvalidValue("Input negative count step")
+        raise InvalidValueException("Input negative count step")
     else:
-        result = str(first_fibonachi) + "," + str(second_fibonachi)
+        result = str(first_fibonacci) + "," + str(second_fibonacci)
         for iterator in range(2, step + 2):
-            result += str("," + str(fibonachi(iterator, first_fibonachi, second_fibonachi)))
+            result += str("," + str(fibonacci(iterator, first_fibonacci, second_fibonacci)))
         print(result)
+        file_result = open("result.txt", 'a')
         file_result.write(result + "\n")
-except InvalidValue as error:
+        file_result.close()
+except InvalidValueException as error:
+    file_result = open("result.txt", 'a')
     file_result.write("Error:" + str(error) + '\n')
+    file_result.close()
     print("Error:" + str(error))

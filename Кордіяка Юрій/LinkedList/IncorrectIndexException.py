@@ -1,0 +1,2 @@
+class IncorrectIndexException(Exception):
+    pass

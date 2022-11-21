@@ -4,26 +4,30 @@ from ErrorDivision import ErrorDivision
 
 class Matrix:
 
-    def __init__(self, matrix=None):
-        if matrix is None:
-            matrix = []
-        self.__matrix = matrix
+    def __init__(self, matrix):
+        self.__matrix = Matrix.filling(self, matrix)
 
-    def read_matrix(self, file_name):
-        with open(file_name, "r") as file:
-            for line in file:
-                list = [x for x in line.strip().split(",")]
-                list = [int(x) for x in list if x]
-                self.__matrix.append(list)
-            self.__matrix = [x for x in self.__matrix if x]
-        file.close()
-        return self.__matrix
+    def filling(self, matrix):
+        if type(matrix) is str:
+            return Matrix.readFromFile(self, matrix)
+        else:
+            return matrix
+
+    def readFromFile(self, nameFile=""):
+        with open(nameFile, "r") as file:
+            matrix = []
+            for line in file.readlines():
+                row = [item for item in line.strip().split(",")]
+                row = [int(item) for item in row if item]
+                matrix.append(row)
+            matrix = [item for item in matrix if item]
+        return matrix
 
     def __add__(self, other):
         if len(self.__matrix) != len(other.__matrix) or len(self.__matrix[0]) != len(other.__matrix[0]):
             raise LengthErrorException("matrices have different sizes")
         else:
-            result = Matrix()
+            result = Matrix([])
             result.__matrix = []
             for i in range(len(self.__matrix)):
                 col = []
@@ -143,7 +147,7 @@ class Matrix:
                 seventh = self.__matrix[1][0] * self.__matrix[2][1] - self.__matrix[2][0] * self.__matrix[1][1]
                 eigthth = -(self.__matrix[0][0] * self.__matrix[2][1] - self.__matrix[2][0] * self.__matrix[0][1])
                 nineth = self.__matrix[0][0] * self.__matrix[1][1] - self.__matrix[1][0] * self.__matrix[0][1]
-                obernenaMatrix = [[first, fourth, seventh], [second, fifth, eigthth], [third, sixth, nineth]]
+                obernenaMatrix = [[first, second, third], [fourth, fifth, sixth], [seventh, eigthth, nineth]]
                 for i in range(len(obernenaMatrix)):
                     for j in range(len(obernenaMatrix[0])):
                         result[i][j] += round(obernenaMatrix[i][j] / determinant, 2)
@@ -152,7 +156,7 @@ class Matrix:
                 second = -(self.__matrix[0][1])
                 third = -(self.__matrix[1][0])
                 fourth = self.__matrix[0][0]
-                obernenaMatrix = [[first, third], [second, fourth]]
+                obernenaMatrix = [[first, second], [third, fourth]]
                 for i in range(len(obernenaMatrix)):
                     for j in range(len(obernenaMatrix[0])):
                         result[i][j] += round(obernenaMatrix[i][j] / determinant, 2)
@@ -165,20 +169,27 @@ class Matrix:
         return self.__matrix[x]
 
     def __truediv__(self, other):
-        result = [[0 for col in range(len(other.__matrix[0]))] for row in range(len(self.__matrix))]
-        o = Matrix.obernena(other)
-        for i in range(len(self.__matrix)):
-            for j in range(len(o[0])):
-                for k in range(len(other.__matrix)):
-                    result[i][j] += round(self.__matrix[i][k] * o[k][j], 2)
-        return Matrix(result)
+        if len(self.__matrix) > 3 or len(self.__matrix[0]) > 3:
+            raise ErrorDivision("do not calculate the matrix of this size \n")
+        else:
+            result = [[0 for col in range(len(other.__matrix[0]))] for row in range(len(self.__matrix))]
+            obernenaMatrix = Matrix.obernena(other)
+            for i in range(len(self.__matrix)):
+                for j in range(len(obernenaMatrix[0])):
+                    for k in range(len(other.__matrix)):
+                        result[i][j] += round(self.__matrix[i][k] * obernenaMatrix[k][j])
+            return Matrix(result)
 
     @classmethod
     def truedivStatic(cls, matrix1, matrix2):
-        result = [[0 for col in range(len(matrix2[0]))] for row in range(len(matrix1))]
-        o = Matrix.obernena(matrix2)
-        for i in range(len(matrix1)):
-            for j in range(len(o[0])):
-                for k in range(len(matrix2)):
-                    result[i][j] += round(matrix1[i][k] * o[k][j], 2)
-        return cls(result)
+        if len(matrix1) > 3 or len(matrix2[0]) > 3:
+            raise ErrorDivision("do not calculate the matrix of this size \n")
+        else:
+            result = [[0 for col in range(len(matrix2[0]))] for row in range(len(matrix1))]
+            obernenaMatrix = Matrix.obernena(Matrix(matrix2))
+            for i in range(len(matrix1)):
+                for j in range(len(obernenaMatrix[0])):
+                    for k in range(len(matrix2)):
+                        result[i][j] += matrix1[i][k] * obernenaMatrix[k][j]
+                        result[i][j] = round(result[i][j], 2)
+            return cls(result)

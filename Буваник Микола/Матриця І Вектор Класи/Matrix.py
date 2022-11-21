@@ -20,70 +20,62 @@ class Matrix:
                           self.__matrix[1][1] * self.__matrix[2][0] - self.__matrix[0][1] * self.__matrix[1][0] * \
                           self.__matrix[2][2] - \
                           self.__matrix[0][0] * self.__matrix[1][2] * self.__matrix[2][1]
-            if determinant != 0:
-                return determinant
-            else:
+            if determinant == 0:
                 raise DetException('matrix determinant==0')
-
         elif len(self.__matrix) == 2 and len(self.__matrix[0]) == 2:
             determinant = self.__matrix[0][0] * self.__matrix[1][1] - self.__matrix[1][0] * self.__matrix[0][1]
-            if determinant != 0:
-                return determinant
-            else:
-                raise DetException('matrix determinant==0')
         elif len(self.__matrix) == 1 and len(self.__matrix[0]) == 1:
             determinant += self.__matrix[0][0]
-            if determinant != 0:
-                return determinant
-            else:
-                raise DetException('matrix determinant==0')
+        return determinant
 
     def minor(self, rows, column):
         matrix = []
-        for iterator in range(len(self.__matrix)):
+        for i in range(len(self.__matrix)):
             row = []
-            for jterator in range(len(self.__matrix[0])):
-                if iterator != rows and jterator != column:
-                    row.append(self.__matrix[iterator][jterator])
+            for j in range(len(self.__matrix[0])):
+                if i != rows and j != column:
+                    row.append(self.__matrix[i][j])
             matrix.append(row)
         matrix = [x for x in matrix if x]
         return matrix
 
-    def reverse(self):
-        matrix2 = []
-        numeric = 1
-        for iterator in range(len(self.__matrix)):
+    def inverse(self):
+        matrix = []
+        counter = 1
+        for i in range(len(self.__matrix)):
             row = []
-            for jterator in range(len(self.__matrix[0])):
-                element = Matrix.det(Matrix(Matrix.minor(self, iterator, jterator)))
+            for j in range(len(self.__matrix[0])):
+                element = Matrix.det(Matrix(Matrix.minor(self, i, j)))
                 if len(self.__matrix) == 3:
-                    if numeric % 2 == 0:
+                    if counter % 2 == 0:
                         element = element * (-1)
                 elif len(self.__matrix) == 2:
-                    if numeric == 2 or numeric == 3:
+                    if counter == 2 or counter == 3:
                         element = element * (-1)
-                numeric += 1
+                counter += 1
                 row.append(element)
-            matrix2.append(row)
-        return matrix2
+            matrix.append(row)
+        determinant = self.det()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                matrix[i][j] = matrix[i][j] / determinant
+        return matrix
 
     def __truediv__(self, other):
         if len(self.__matrix[0]) == len(other.__matrix):
-            result = [[0 for x in range(len(other.__matrix[0]))] for y in range(len(self.__matrix))]
-            determinant = Matrix.det(other)
-            matrix_obernena = Matrix.reverse(other)
-            matrix_obernena = Matrix.trans(self,matrix_obernena)
-            matrix_obernena = [[round(matrix_obernena[iterator][jterator] / determinant, 2) for jterator in
-                                range(len(matrix_obernena[0]))] for
-                               iterator in range(len(matrix_obernena))]
+            result = []
+            matrixInverse = Matrix.trans(self, Matrix.inverse(other))
             for i in range(len(self.__matrix)):
-                for j in range(len(matrix_obernena[0])):
-                    for k in range(len(matrix_obernena)):
-                        result[i][j] += self.__matrix[i][k] * matrix_obernena[k][j]
-                        result[i][j] = round(result[i][j], 2)
+                row = []
+                for j in range(len(matrixInverse[0])):
+                    temp = float()
+                    for x in range(len(matrixInverse)):
+                        temp += self.__matrix[i][x] * matrixInverse[x][j]
+                    row.append(round(temp,3))
+                result.append(row)
             return Matrix(result)
         else:
-            raise LengthNotMatchExeption('the lengths of the matrices do not match')
+            raise LengthNotMatchExeption('Size matrix is bad')
 
     def __mul__(self, other):
         if len(self.__matrix[0]) != len(other.__matrix):

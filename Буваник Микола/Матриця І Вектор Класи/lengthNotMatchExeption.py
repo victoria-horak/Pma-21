@@ -1,0 +1,2 @@
+class LengthNotMatchExeption(Exception):
+    pass

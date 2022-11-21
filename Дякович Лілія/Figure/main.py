@@ -2,8 +2,12 @@ from Rectangle import Rectangle
 from Triangle import Triangle
 from Square import Square
 from Circle import Circle
-from Colors import *
+from BlueColor import Blue
 from NotExistException import NotExistException
+from GreenColor import Green
+from YellowColor import Yellow
+from PinkColor import Pink
+
 try:
     rectangle = Rectangle(Blue, 2, 4)
     rectangle.print()

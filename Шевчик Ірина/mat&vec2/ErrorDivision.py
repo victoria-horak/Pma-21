@@ -1,0 +1,2 @@
+class ErrorDivision(Exception):
+    pass
